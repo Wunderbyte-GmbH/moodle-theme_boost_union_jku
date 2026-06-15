@@ -3,3 +3,152 @@
  * Add your Pre-SCSS code here.
  * It will be added on top of Boost Union's Pre-SCSS code.
  ***************************************************************/
+
+// Import custom fonts
+@import "fonts";
+
+// Color variables
+$primary: #4FB0BF;
+$success: #5BA755;
+$navbar-height: 72px;
+
+$body-color: rgba(0, 0, 0, 0.90);
+$body-bg: #fff;
+
+$interface-dark-primary: #0B131F;
+$text-weak: rgba(0, 0, 0, 0.60);
+
+// Fill colors
+$fill-weak: rgba(0, 0, 0, 0.04);
+$fill-strong: rgba(0, 0, 0, 0.90);
+
+// Brand colors
+$primary-text-emphasis: #001F33;
+$primary-bg-subtle: rgba(79, 176, 191, 0.05);
+$primary-border-subtle: rgba(79, 176, 191, 0.20);
+$primary-border-strong: rgba(79, 176, 191, 0.80);
+
+// Warning colors
+$warning-bg-subtle: rgba(255, 192, 46, 0.05);
+$warning-border-subtle: rgba(143, 108, 26, 0.20);
+
+// Button colors
+$bu-button-brand-color: #4FB0BF;
+$bu-button-brand-hover-color: #3a8b95;
+$bu-button-brand-active-color: #2e6e74;
+$bu-button-text-color: #fff;
+
+// Typography
+$font-family-base: "Montserrat", sans-serif;
+$font-family-sans-serif: "Montserrat", sans-serif;
+
+$font-size-base: 1rem; // 16px
+$line-height-base: 1.5; // 24px
+
+$headings-font-family: "Montserrat", sans-serif;
+$headings-line-height: 1.333; // 24px / 18px
+
+// Borders
+$border-color: rgba(0, 0, 0, 0.10);
+$border-radius: 0;
+$border-radius-sm: 0;
+$border-radius-lg: 0;
+$border-radius-xl: 0;
+$border-radius-xxl: 0;
+$border-radius-pill: 0;
+
+// Button border radius
+$btn-border-radius: 0;
+$btn-border-radius-sm: 0;
+$btn-border-radius-lg: 0;
+
+// Card border radius
+$card-border-radius: 0;
+$card-inner-border-radius: 0;
+$card-border-width: 2px;
+
+// Spacing
+$spacer: 1rem;
+
+$spacers: (
+    0: 0,
+    1: 0.5rem,  // 8px
+    2: 1rem,    // 16px
+    3: 2.5rem,  // 40px
+    4: 5rem     // 80px
+);
+
+$spacers: map-merge(
+    $spacers,
+    (
+        8: 8px,
+        12: 12px,
+        24: 24px,
+        32: 32px,
+        64: 64px
+    )
+);
+
+// Layout & Container widths
+$container-padding-x: 0; // Remove container padding
+$course-content-maxwidth: 1288px; // Full width content (or set specific: 1200px, 1400px, etc.)
+$h5p-content-maxwidth: 100%;
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1288px,  // matches your course content
+  xxl: 1488px  // wider for very large screens
+);
+
+// Boost Union specific widths
+$bu-blockregionoutsideleftwidth: 0; // Left block region width
+$bu-blockregionoutsiderightwidth: 0; // Right block region width
+
+$h1-font-size: 2rem; // 32px
+$h2-font-size: 1.5rem; // 24px
+$h3-font-size: 1.25rem; // 20px
+$h4-font-size: 1.125rem; // 18px
+$h5-font-size: 1rem; // 16px
+$h6-font-size: 0.875rem; // 14px
+
+$link-color: $primary;
+$link-hover-color: $bu-button-brand-hover-color;
+$link-decoration: none;
+$link-hover-decoration: underline;
+$link-shade-percentage: 15%;
+
+
+:root {
+  --Primary-Light-1000: #{$primary};
+  --Green-Light-1000: #{$success};
+  --Spacing-16: #{$font-size-base};
+  --Stroke-Weak: #{$border-color};
+  --Fill-Weak: #{$fill-weak};
+  --Stroke-Brand-weak: #{$primary-border-subtle};
+  --Fill-Brand-weak: #{$primary-bg-subtle};
+  --interface-dark_primary: #{$interface-dark-primary};
+  --Font-family-Heading: #{$headings-font-family};
+  --Font-size-Heading-4: #{$h4-font-size};
+  --Line-height-Heading-4: 24px;
+  --brand_primary-900: #{$primary-text-emphasis};
+  --Primary-Light-50: #{$primary-bg-subtle};
+  --Fill-Strong: #{$fill-strong};
+  --Spacing-0: #{map-get($spacers, 0)};
+  --Spacing-80: #{map-get($spacers, 4)};
+  --Spacing-40: #{map-get($spacers, 3)};
+  --Corner-radius-0: #{$border-radius};
+  --Stroke-Warning-weak: #{$warning-border-subtle};
+  --Fill-Warning-weak: #{$warning-bg-subtle};
+  --Font-family-Body: #{$font-family-base};
+  --Font-size-Small: #{$font-size-base};
+  --Line-height-Small: #{$font-size-base * $line-height-base};
+  --Stroke-Brand-strong: #{$primary-border-strong};
+  --Spacing-8: #{map-get($spacers, 1)};
+  --Text-Weak: #{$text-weak};
+}
+
+#block-region-outside-top .block > .card,
+#block-region-outside-top .block {
+  border: none; // Remove card border for top block region.
+}

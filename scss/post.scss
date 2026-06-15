@@ -3,3 +3,145 @@
  * Add your SCSS code here.
  * It will be added on top of Boost Union's SCSS code.
  ***************************************************************/
+$bu-button-brand-color: #fff;
+
+// Override primary button to use white text on primary background
+.btn-primary {
+  --bs-btn-color: #fff !important;
+  --bs-btn-bg: #4FB0BF !important;
+  --bs-btn-border-color: #4FB0BF !important;
+  --bs-btn-hover-color: #fff !important;
+  --bs-btn-hover-bg: #3a8b95 !important;
+  --bs-btn-hover-border-color: #3a8b95 !important;
+  --bs-btn-focus-shadow-rgb: 79, 176, 191 !important;
+  --bs-btn-active-color: #fff !important;
+  --bs-btn-active-bg: #2e6e74 !important;
+  --bs-btn-active-border-color: #2e6e74 !important;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+  --bs-btn-disabled-color: #fff !important;
+  --bs-btn-disabled-bg: #4FB0BF !important;
+  --bs-btn-disabled-border-color: #4FB0BF !important;
+}
+
+// Override secondary button with inverted style (outline style)
+.btn-secondary {
+  --bs-btn-color: #4FB0BF !important;
+  --bs-btn-bg: #fff !important;
+  --bs-btn-border-color: #4FB0BF !important;
+  --bs-btn-hover-color: #fff !important;
+  --bs-btn-hover-bg: #4FB0BF !important;
+  --bs-btn-hover-border-color: #4FB0BF !important;
+  --bs-btn-focus-shadow-rgb: 79, 176, 191 !important;
+  --bs-btn-active-color: #fff !important;
+  --bs-btn-active-bg: #3a8b95 !important;
+  --bs-btn-active-border-color: #3a8b95 !important;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+  --bs-btn-disabled-color: rgba(79, 176, 191, 0.5) !important;
+  --bs-btn-disabled-bg: #fff !important;
+  --bs-btn-disabled-border-color: rgba(79, 176, 191, 0.5) !important;
+}
+
+.btn-secondary .fa::before {
+  color: #4FB0BF;
+}
+
+.btn-secondary:hover .fa::before {
+  color: #FFF;
+}
+
+// Override link colors
+a {
+  color: #4FB0BF;
+  
+  &:hover,
+  &:focus {
+    color: #3a8b95;
+  }
+}
+
+// Also override via CSS custom properties for elements that use them
+:root {
+  --bs-link-color: #4FB0BF;
+  --bs-link-hover-color: #3a8b95;
+  --bs-link-color-rgb: 79, 176, 191;
+  --bs-link-hover-color-rgb: 58, 139, 149;
+  
+  // Remove all border radius
+  --bs-border-radius: 0 !important;
+  --bs-border-radius-sm: 0 !important;
+  --bs-border-radius-lg: 0 !important;
+  --bs-border-radius-xl: 0 !important;
+  --bs-border-radius-xxl: 0 !important;
+  --bs-border-radius-pill: 0 !important;
+}
+
+// Remove border radius from all buttons
+.btn,
+[class*="btn-"] {
+  border-radius: 0 !important;
+}
+
+// Remove border radius from all cards
+.card,
+.card-header,
+.card-footer,
+.card-img,
+.card-img-top,
+.card-img-bottom {
+  border-radius: 0 !important;
+}
+
+#page-mod-booking-optionview #page {
+  padding: 0px;
+}
+
+#page-mod-booking-optionview .main-inner-wrapper {
+  background: rgba(79, 176, 191, 0.05);
+}
+#page-mod-booking-optionview 
+#region-main, #page-mod-booking-optionview #topofscroll {
+  background: transparent;
+}
+
+.mod-booking-view-card-image {
+    width: calc(100% + 4px);
+    margin-left: -2px;
+    margin-top: -2px;
+}
+
+.wunderbyte-table-grid .list-group-item {
+  border-width: 2px;
+}
+
+#theme-block-region-outside-top {
+    .block .card-body {
+        padding: 0 !important;
+    }
+    .block .card-text.content {
+        margin-top: 0 !important;
+    }
+}
+
+#page {
+   padding: 0 !important;
+}
+
+.wunderbyte-table-grid .list-group-item {
+  box-shadow: none;
+}
+
+.navbar-brand, .navbar-brand .logo {
+  padding-left: 32px;
+  max-height: 48px;
+  height: 48px;
+}
+
+.wb_news_hero_box h1 {
+    margin: 0 0 24px;
+}
+
+// Login page side image. Defined here (not in the template's inline <style>)
+// so the [[pix:...]] placeholder is resolved by Moodle's CSS post-processor.
+.custom-login-right {
+    background-image: url([[pix:theme|loginbg]]);
+}

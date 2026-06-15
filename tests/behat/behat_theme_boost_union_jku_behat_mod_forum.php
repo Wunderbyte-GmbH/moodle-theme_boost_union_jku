@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Behat blocks-related step definition overrides for the Boost Union Child theme.
+ * Behat mod_forum-related step definition overrides for the Boost Union Child theme.
  *
- * @package    theme_boost_union_child
+ * @package    theme_boost_union_jku
  * @category   test
  * @copyright  2022 Luca Bösch, BFH Bern University of Applied Sciences luca.boesch@bfh.ch
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,17 +26,17 @@
 // NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
 // For that reason, we can't even rely on $CFG->admin being available here.
 
-require_once(__DIR__ . '/../../../boost_union/tests/behat/behat_theme_boost_union_behat_blocks.php');
+require_once(__DIR__ . '/../../../boost_union/tests/behat/behat_theme_boost_union_behat_mod_forum.php');
 
-use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Gherkin\Node\TableNode;
 
 /**
- * Blocks-related step definition overrides for the Boost Union Child theme.
+ * Forum-related step definition overrides for the Boost Union Child theme.
  *
- * @package    theme_boost_union_child
+ * @package    theme_boost_union_jku
  * @category   test
  * @copyright  2022 Luca Bösch, BFH Bern University of Applied Sciences luca.boesch@bfh.ch
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class behat_theme_boost_union_child_behat_blocks extends behat_theme_boost_union_behat_blocks {
+class behat_theme_boost_union_jku_behat_mod_forum extends behat_theme_boost_union_behat_mod_forum {
 }

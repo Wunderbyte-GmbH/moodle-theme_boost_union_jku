@@ -1,7 +1,7 @@
-moodle-theme_boost_union_child
+moodle-theme_boost_union_jku
 ==============================
 
-[![Moodle Plugin CI](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_child/actions/workflows/moodle-plugin-ci.yml/badge.svg?branch=main)](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_child/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amain)
+[![Moodle Plugin CI](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_jku/actions/workflows/moodle-plugin-ci.yml/badge.svg?branch=main)](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_jku/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amain)
 
 Boost Union Child is a boilerplate for enhancing Boost Union with custom or local functionality.
 
@@ -28,7 +28,7 @@ Installation
 ------------
 
 Install Boost Union Child like any other plugin to folder
-/theme/boost_union_child
+/theme/boost_union_jku
 
 See http://docs.moodle.org/en/Installing_plugins for details on installing Moodle plugins
 
@@ -71,15 +71,15 @@ To build your own grandchild theme of Boost with this boilerplate, you have to g
 
 ### Renaming the grandchild theme (optional)
 
-If you want to run your grandchild theme with a different name than theme_boost_union_child, for example theme_boost_union_foo, you have to take some actions:
+If you want to run your grandchild theme with a different name than theme_boost_union_jku, for example theme_boost_union_foo, you have to take some actions:
 
-* In the whole codebase of Boost Union Child below /theme/boost_union_child,
-  * search all occurrences of 'boost_union_child' and replace them with 'boost_union_foo'
+* In the whole codebase of Boost Union Child below /theme/boost_union_jku,
+  * search all occurrences of 'boost_union_jku' and replace them with 'boost_union_foo'
   * search all occurrences of 'Boost Union Child' and replace them with 'Boost Union Foo'
-* In the language pack directory /theme/boost_union_child/lang,
+* In the language pack directory /theme/boost_union_jku/lang,
   * rename the language pack file from en/theme_boost_union.php to en/theme_boost_foo.php
-* In the tests directory /theme/boost_union_child/tests/behat,
-  * rename the Behat step definition files from behat_theme_boost_union_child_behat_\*.php to behat_theme_boost_union_foo_behat_\*.php
+* In the tests directory /theme/boost_union_jku/tests/behat,
+  * rename the Behat step definition files from behat_theme_boost_union_jku_behat_\*.php to behat_theme_boost_union_foo_behat_\*.php
 
 ### Add your Boost Union Child features
 
@@ -93,14 +93,14 @@ In addition to that, have a look at the 'Extension examples' section below.
 
 If you want to use Moodle plugin updates properly and especially if you intend to publish your grandchild theme, you set your plugin version information properly:
 
-* In the version file /theme/boost_union_child/version.php,
+* In the version file /theme/boost_union_jku/version.php,
   * raise $plugin->version to a proper version of your choice (see https://docs.moodle.org/dev/Moodle_versions for an explanation how Moodle version numbers are composed)
   * set $plugin->release to a release string of your choice (in Boost Union, we use release strings like 'v4.3-r1' which means 'First release for Moodle 4.3')
   * set $plugin->requires to the version number of the miniumum Moodle core version which you would like to support (see https://moodledev.io/general/releases for the list of Moodle core versions)
   * likewise, set $plugin->supported to an array with the range of Moodle core versions which you would like to support (for example, to support Moodle 4.3 only officially, set it to '[403, 403]')
   * raise the entry for theme_boost_union in $plugin->dependencies to the version number of the Boost Union version which you tested your grandchild theme against, just to avoid any hickups if someone tries to combine your grandchild theme with a much older version of Boost Union
 
-As an orientation how all these settings should look like, you can compare /theme/boost_union_child/version.php with /theme/boost_union/version.php, of course.
+As an orientation how all these settings should look like, you can compare /theme/boost_union_jku/version.php with /theme/boost_union/version.php, of course.
 
 ### Congratulate yourself
 
@@ -116,7 +116,7 @@ Developing for Boost Union means to apply similar techniques for every new featu
 
 ### How to allow the admin to configure a SCSS variable with an admin setting
 
-In the [extension-setting-scss-variable](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_child/tree/extension-setting-scss-variable) branch, we prepared some example code which shows you how allow the admin to configure a SCSS variable with an admin setting and without fiddling with SCSS.
+In the [extension-setting-scss-variable](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_jku/tree/extension-setting-scss-variable) branch, we prepared some example code which shows you how allow the admin to configure a SCSS variable with an admin setting and without fiddling with SCSS.
 
 In the example, we added a text admin setting into a dedicated admin settings tab. This setting is evaluated in lib.php where the pre-SCSS code is composed and where, based on the setting, a SCSS variable of Boost Core is overwritten. In this example, we chose to allow you to configure the $navbar-height variable. As a result, you can modify the height of the navbar just from within the admin setting if needed.
 
@@ -124,7 +124,7 @@ The example code is completed by a Behat test which verifies now and forever tha
 
 ### Modify a mustache template from Moodle core
 
-In the [extension-modify-mustache-core-template](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_child/tree/extension-modify-mustache-core-template) branch, we prepared some example code which shows you how to modify a mustache template from Moodle core in Boost Union Child.
+In the [extension-modify-mustache-core-template](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_jku/tree/extension-modify-mustache-core-template) branch, we prepared some example code which shows you how to modify a mustache template from Moodle core in Boost Union Child.
 
 In the example, we copied the block.mustache template from Moodle core to Boost Union Child and modified in a way that the block controls are shown in the block footer now. The modified template will be used instantly as soon as Boost Union Child is the active theme.
 
@@ -132,7 +132,7 @@ Of course, the example code is completed by a Behat test which verifies now and 
 
 ### Modify a mustache template from Boost Union
 
-In the [extension-modify-mustache-bu-template](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_child/tree/extension-modify-mustache-bu-template) branch, we prepared some example code which shows you how to modify a mustache template from Boost Union in Boost Union Child.
+In the [extension-modify-mustache-bu-template](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_jku/tree/extension-modify-mustache-bu-template) branch, we prepared some example code which shows you how to modify a mustache template from Boost Union in Boost Union Child.
 
 In the example, we copied the infobanner-item.mustache template from Boost Union to Boost Union Child and modified in a way that the additional text is shown in the infobanner now. The modified template will be used instantly as soon as Boost Union Child is the active theme.
 
@@ -160,7 +160,7 @@ Plugin repositories
 This boilerplate is not published in the Moodle plugins repository.
 
 The latest development version can be found on Github:
-https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_child
+https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_jku
 
 
 Bug and problem reports / Support requests
@@ -169,7 +169,7 @@ Bug and problem reports / Support requests
 This boilerplate is carefully developed and thoroughly tested, but bugs and problems can always appear.
 
 Please report bugs and problems on Github:
-https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_child/issues
+https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_jku/issues
 
 We will do our best to solve your problems, but please note that due to limited resources we can't always provide per-case support.
 
@@ -180,10 +180,10 @@ Feature proposals
 Due to limited resources, the functionality of this boilerplate is primarily implemented for our own local needs and published as-is to the community. We are aware that members of the community will have other needs and would love to see them solved by this boilerplate.
 
 Please issue feature proposals on Github:
-https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_child/issues
+https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_jku/issues
 
 Please create pull requests on Github:
-https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_child/pulls
+https://github.com/moodle-an-hochschulen/moodle-theme_boost_union_jku/pulls
 
 We are always interested to read about your feature proposals or even get a pull request from you, but please accept that we can handle your issues only as feature _proposals_ and not as feature _requests_.
 

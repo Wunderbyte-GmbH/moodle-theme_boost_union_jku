@@ -17,7 +17,7 @@
 /**
  * Theme Boost Union Child - Language pack
  *
- * @package    theme_boost_union_child
+ * @package    theme_boost_union_jku
  * @copyright  2023 Daniel Poggenpohl <daniel.poggenpohl@fernuni-hagen.de> and Alexander Bias <bias@alexanderbias.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

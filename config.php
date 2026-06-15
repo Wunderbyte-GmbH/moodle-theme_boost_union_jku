@@ -17,7 +17,7 @@
 /**
  * Theme Boost Union Child - Theme config
  *
- * @package    theme_boost_union_child
+ * @package    theme_boost_union_jku
  * @copyright  2024 Alexander Bias <bias@alexanderbias.de>
  *             based on code by Lars Bonczek
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -35,16 +35,16 @@ defined('MOODLE_INTERNAL') || die();
 require($CFG->dirroot . '/theme/boost_union/config.php');
 
 // Then, we require Boost Union Child's locallib.php to make sure that it's always loaded.
-require_once($CFG->dirroot . '/theme/boost_union_child/locallib.php');
+require_once($CFG->dirroot . '/theme/boost_union_jku/locallib.php');
 
 // Next, we overwrite only the settings which differ between Boost Union and Boost Union Child.
-$THEME->name = 'boost_union_child';
+$THEME->name = 'boost_union_jku';
 $THEME->scss = function ($theme) {
-    return theme_boost_union_child_get_main_scss_content($theme);
+    return theme_boost_union_jku_get_main_scss_content($theme);
 };
 $THEME->parents = ['boost_union', 'boost'];
-$THEME->extrascsscallback = 'theme_boost_union_child_get_extra_scss';
-$THEME->prescsscallback = 'theme_boost_union_child_get_pre_scss';
+$THEME->extrascsscallback = 'theme_boost_union_jku_get_extra_scss';
+$THEME->prescsscallback = 'theme_boost_union_jku_get_pre_scss';
 
 // We need to duplicate the rendererfactory even if it is set to the same value as in Boost Union.
 // The theme_config::get_renderer() method needs it to be directly in the theme_config object.

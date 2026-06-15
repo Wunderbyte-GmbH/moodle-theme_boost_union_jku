@@ -17,7 +17,7 @@
 /**
  * Theme Boost Union Child - Local library
  *
- * @package    theme_boost_union_child
+ * @package    theme_boost_union_jku
  * @copyright  2023 Alexander Bias <bias@alexanderbias.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
