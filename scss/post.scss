@@ -145,3 +145,16 @@ a {
 .custom-login-right {
     background-image: url([[pix:theme|loginbg]]);
 }
+
+#page-theme-boost_union_jku-login #page {
+  margin: 0px;
+  overflow: hidden;
+}
+
+#page-theme-boost_union_jku-login #page-content.pb-3 {
+  padding: 0px;
+}
+
+#page-theme-boost_union_jku-login [id="region-main-box"] {
+  padding: 0px;
+}

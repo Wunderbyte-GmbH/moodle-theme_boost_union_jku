@@ -52,5 +52,18 @@ $string['extrascssinheritancesetting_desc'] = 'With this setting, you control if
  * Add your language strings for your settings here.
  *************************************************************/
 
+// Booking option description view (formerly provided by local_urise).
+$string['aboutoffer'] = 'About the offer';
+$string['additionalinfo'] = 'Additional information';
+$string['coursecontent'] = 'Content';
+$string['coursemethods'] = 'Methods';
+$string['gotoprofile'] = 'Profile';
+$string['optiondates'] = 'Date(s)';
+$string['orgacontact'] = 'Contact for content-related inquiries';
+$string['requirements'] = 'Requirements';
+$string['showdates'] = 'Show dates';
+$string['teachers'] = 'Teacher';
+$string['termsandconditions'] = 'With booking I accept the&nbsp;<a href="{$a}" target="_blank">terms and conditions</a>.';
+
 // Privacy API.
 $string['privacy:metadata'] = 'The Boost Union Child theme does not store any personal data about any user.';
