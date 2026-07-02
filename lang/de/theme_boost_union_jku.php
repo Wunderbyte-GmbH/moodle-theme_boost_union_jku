@@ -45,3 +45,6 @@ $string['requirements'] = 'Voraussetzungen';
 $string['showdates'] = 'Termine anzeigen';
 $string['teachers'] = 'Trainer*in';
 $string['termsandconditions'] = 'Bei Anmeldung akzeptiere ich&nbsp;<a href="{$a}" target="_blank">die Teilnahmebedingungen</a>.';
+
+// FAQ.
+$string['searchfaq'] = 'Wie können wir Ihnen helfen? Suchen Sie nach einer Antwort oder einem Thema...';

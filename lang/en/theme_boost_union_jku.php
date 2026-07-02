@@ -67,3 +67,6 @@ $string['termsandconditions'] = 'With booking I accept the&nbsp;<a href="{$a}" t
 
 // Privacy API.
 $string['privacy:metadata'] = 'The Boost Union Child theme does not store any personal data about any user.';
+
+// FAQ.
+$string['searchfaq'] = 'How can we help you? Search for an answer or a topic...';

@@ -158,3 +158,340 @@ a {
 #page-theme-boost_union_jku-login [id="region-main-box"] {
   padding: 0px;
 }
+
+.btn {
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+}
+
+#theme-block-region-outside-top {
+  margin: 0 !important;
+}
+
+#page {
+  padding: 0;
+}
+#theme-block-region-outside-top .card.wb_news_hero_box
+.card-body {
+  padding:  64px !important;
+}
+
+.wunderbyte-table-grid .list-group-item {
+  box-shadow: none;
+}
+
+
+.lexa-tabs {
+    border-bottom: 2px solid #61bfcc;
+    background: #f5fbfc;
+}
+
+.lexa-tabs .nav-link {
+    border: 0;
+    color: #666;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+}
+
+.lexa-tabs .nav-link i {
+    margin-right: .6rem;
+    color: #8a8f91;
+}
+
+.lexa-tabs .nav-link.active {
+    color: #55b8c7;
+    background: transparent;
+    border-bottom: 4px solid #55b8c7;
+}
+
+.lexa-tabs .nav-link.active i {
+    color: #55b8c7;
+}
+
+.lexa-tab-content {
+    padding-top: 1.5rem;
+}
+.searchbackground {
+background: var(--Primary-Light-1000, #4FB0BF); }
+
+.filterheader {
+  background: linear-gradient(0deg, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 0%, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 100%), #FFF;
+}
+
+.wunderbyte_table_components  {
+  background-color: transparent;
+}
+.wb-news-container {
+  max-width: 1288px;
+}
+
+.wunderbyte-table-grid {
+  max-width: 1488px;
+  margin: auto
+}
+
+.wb-news-edit-single .btn {
+   background: gray;
+}
+
+#local_wb_faq_table {
+  background: var(--Primary-Light-1000);
+}
+
+/* L2803 */
+.wbfaqinput {
+    width: 600px;
+}
+
+/* L2819 (inside @include media-breakpoint-down(sm)) */
+@include media-breakpoint-down(sm) {
+    .wbfaqinput {
+        width: 100%;
+    }
+}
+
+/* L3030 */
+.wbfaqinput {
+    max-width: 628px !important;
+    width: 100% !important;
+    height: 55px !important;
+    padding-left: 21px !important;
+}
+
+.hidefaq {
+    display: inline-block !important;
+}
+
+.backgroundfaq {
+    background: linear-gradient(77.48deg, #001F33 -5.09%, #0063A6 98.91%);
+}
+
+.local_wb_faq_container {
+    margin-top: 50px;
+}
+
+.lexa-faqcat {
+    padding: 20px 0;
+    border-bottom: 1px solid #D9DBE9;
+}
+
+.wbfaqaccordion .card, .wbfaqaccordion .card-header {
+    background: transparent;
+    border: none;
+}
+
+.wbfaqaccordion .card {
+    padding: 50px !important;
+
+}
+
+.wbfaqaccordion .accordion-body {
+    border-top: none
+}
+
+.wbfaqaccordion
+.accordion-item {
+    border-bottom: 1px solid     #D9DBE9
+}
+
+.wbfaqaccordion .accordion-item:last-child {
+    border-bottom: none;
+}
+
+.wbfaqaccordion
+.accordion-item {
+    border-bottom: 1px solid#D9DBE9
+}
+
+.wbfaqaccordion .accordion-item:last-child {
+    border-bottom: none;
+}
+
+.wbfaqaccordion {
+    list-style: none !important;
+  }
+
+  #wb_faq_searchbox .wbfaqaccordion {
+    box-shadow: none;
+  }
+
+.wbfaqcollapsebutton:focus,
+ .wbfaqcollapsebutton:hover
+{
+    box-shadow: none !important;
+    text-decoration: none !important;
+}
+
+.wbfaqcollapsebutton .wbfaqaccordionbuttonm {
+    display: inline-block;
+    line-height: 30px;
+}
+
+.wbfaqcollapsebutton .wbfaqaccordionbuttonp {
+    display: none;
+    line-height: 30px;
+}
+
+.wbfaqcollapsebutton.collapsed .wbfaqaccordionbuttonp {
+    display: inline-block;
+}
+
+.wbfaqcollapsebutton.collapsed .wbfaqaccordionbuttonm {
+    display: none;
+}
+
+.wbfaqbreadcrumb[data-catvalue="FAQ"] {
+    display: none !important;
+}
+
+.current-faq.wb-breadcrumb .d-flex{
+    border: none !important;
+    max-width: fit-content;
+}
+
+.wbfaqbreadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #809FB8;
+}
+
+.btn.wbfaqbreadcrumb {
+    padding: 10px 20px;
+}
+
+.wbfaqbreadcrumb.wb_faq-active {
+    color:#0063A6;
+}
+
+#page-local-wb_faq-index #page  {
+  background-color: var(--Primary-Light-50);
+}
+
+#page-local-wb_faq-index #topofscroll, #page-local-wb_faq-index #region-main, .local_wb_faq_container {
+  background-color: transparent;
+}
+
+#page-local-wb_faq-index #topofscroll, #page-local-wb_faq-index #page-content {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+
+.wb_faq-accordion-item {
+  position: relative;
+  list-style: none;
+  border-top: 1px solid #d9dedf;
+}
+
+.wb_faq-accordion-item:last-child {
+  border-bottom: 1px solid #d9dedf;
+}
+
+.wb_faq-accordion-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.wb_faq-accordion-header {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  margin: 0;
+}
+
+.wb_faq-accordion-button {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #1f2426;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+}
+
+.wb_faq-accordion-button:hover,
+.wb_faq-accordion-button:focus {
+  background: #eef3f3;
+  color: #1f2426;
+  text-decoration: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.wb_faq-accordion-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  padding-right: 2rem;
+}
+
+.wb_faq-accordion-chevron {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  margin-right: 8px;
+  border-right: 2px solid #778082;
+  border-bottom: 2px solid #778082;
+  transform: rotate(45deg);
+  transition: transform 160ms ease;
+}
+
+.wb_faq-accordion-button:not(.collapsed) .wb_faq-accordion-chevron {
+  transform: rotate(225deg);
+}
+
+.wb_faq-accordion-body {
+  padding: 0 0 24px 0;
+}
+
+.wb_faq-accordion-content {
+  max-width: 1180px;
+  color: #666d70;
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+.wb_faq-accordion-content p:last-child {
+  margin-bottom: 0;
+}
+
+.wb_faq-accordion-drag {
+  position: absolute;
+  left: -32px;
+  top: 26px;
+  color: #778082;
+  cursor: move;
+}
+
+.wb_faq-accordion-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-left: 24px;
+}
+
+.wb_faq-accordion-actions a {
+  color: #495057;
+  cursor: pointer;
+}
+
+.wb_faq-accordion-actions a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+// Constrain the footer width on large screens (>= xl / 1200px).
+.mw-1488 {
+  @include media-breakpoint-up(xl) {
+    max-width: 1488px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
