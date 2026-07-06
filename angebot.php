@@ -17,7 +17,7 @@
 /**
  * My Courses page with custom theme and block regions.
  *
- * @package     theme_boost_union_child
+ * @package     theme_boost_union_jku
  * @copyright   2025 Wunderbyte GmbH <info@wunderbyte.at>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

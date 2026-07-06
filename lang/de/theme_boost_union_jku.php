@@ -48,3 +48,7 @@ $string['termsandconditions'] = 'Bei Anmeldung akzeptiere ich&nbsp;<a href="{$a}
 
 // FAQ.
 $string['searchfaq'] = 'Wie können wir Ihnen helfen? Suchen Sie nach einer Antwort oder einem Thema...';
+
+// Search header (mod_booking table templates).
+$string['searchheadertext'] = 'Was möchten Sie lernen?';
+$string['searchsubheadertext'] = 'Durchsuchen Sie unser Kursangebot nach Themen, Terminen und Orten.';

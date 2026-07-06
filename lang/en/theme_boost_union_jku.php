@@ -70,3 +70,7 @@ $string['privacy:metadata'] = 'The Boost Union Child theme does not store any pe
 
 // FAQ.
 $string['searchfaq'] = 'How can we help you? Search for an answer or a topic...';
+
+// Search header (mod_booking table templates).
+$string['searchheadertext'] = 'What are you interested in?';
+$string['searchsubheadertext'] = 'Search our course offerings for topics, dates and locations.';
