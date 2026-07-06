@@ -487,6 +487,12 @@ background: var(--Primary-Light-1000, #4FB0BF); }
   text-decoration: none;
 }
 
+// Filterview ([filterview] / [filterviewpseudo] shortcodes): line underneath each category.
+.wbtablefilterview .singlehierarchy {
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 20px;
+}
+
 // Constrain the footer width on large screens (>= xl / 1200px).
 .mw-1488 {
   @include media-breakpoint-up(xl) {
@@ -494,4 +500,21 @@ background: var(--Primary-Light-1000, #4FB0BF); }
     margin-left: auto !important;
     margin-right: auto !important;
   }
+}
+
+// Frontpage: hide the main scroll container and wunderbyte table pagination.
+#page-site-index #topofscroll,
+#page-site-index .wbt-pagination-navs {
+  display: none;
+}
+
+#theme-block-region-outside-bottom {
+  margin: 0;
+  border: none;
+}
+
+#theme-block-region-outside-bottom .block_html.block.block_with_controls.card.mb-3 {
+  margin: 0 !important;
+  border: none;
+  background-color: var(--Primary-Light-50);
 }
