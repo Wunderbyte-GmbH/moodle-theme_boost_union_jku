@@ -489,8 +489,8 @@ background: var(--Primary-Light-1000, #4FB0BF); }
 
 // Filterview ([filterview] / [filterviewpseudo] shortcodes): line underneath each category.
 .wbtablefilterview .singlehierarchy {
-  border-bottom: 2px solid var(--Text-Strong, rgba(0, 0, 0, 0.90));
-  margin-bottom: 20px;
+  border-bottom: 1px solid var(--Text-Strong, rgba(0, 0, 0, 0.90));
+  margin-bottom: 14px;
 }
 
 // Constrain the footer width on large screens (>= xl / 1200px).
@@ -531,6 +531,7 @@ h1, .h1 {
 
 #theme-block-region-outside-bottom {
   margin: 0;
+  margin-bottom: 0 !important;
   border: none;
 }
 
