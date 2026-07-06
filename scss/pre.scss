@@ -17,6 +17,7 @@ $body-bg: #fff;
 
 $interface-dark-primary: #0B131F;
 $text-weak: rgba(0, 0, 0, 0.60);
+$text-strong: rgba(0, 0, 0, 0.90);
 
 // Fill colors
 $fill-weak: rgba(0, 0, 0, 0.04);
@@ -83,6 +84,7 @@ $spacers: map-merge(
     (
         8: 8px,
         12: 12px,
+        15: 15px,
         16: 16px,
         24: 24px,
         32: 32px,
@@ -150,6 +152,7 @@ $link-shade-percentage: 15%;
   --Stroke-Brand-strong: #{$primary-border-strong};
   --Spacing-8: #{map-get($spacers, 1)};
   --Text-Weak: #{$text-weak};
+  --Text-Strong: #{$text-strong};
 }
 
 #block-region-outside-top .block > .card,

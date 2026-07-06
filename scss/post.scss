@@ -489,7 +489,7 @@ background: var(--Primary-Light-1000, #4FB0BF); }
 
 // Filterview ([filterview] / [filterviewpseudo] shortcodes): line underneath each category.
 .wbtablefilterview .singlehierarchy {
-  border-bottom: 1px solid $border-color;
+  border-bottom: 2px solid var(--Text-Strong, rgba(0, 0, 0, 0.90));
   margin-bottom: 20px;
 }
 
@@ -500,6 +500,27 @@ background: var(--Primary-Light-1000, #4FB0BF); }
     margin-left: auto !important;
     margin-right: auto !important;
   }
+}
+
+// Heading 1/Bold: size, family and line-height come from pre.scss variables
+// ($h1-font-size: 48px, Montserrat, $headings-line-height: 1.333 = 64px);
+// only weight and letter-spacing differ from the Bootstrap defaults.
+h1, .h1 {
+  color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+// Primary navigation items: Small/Regular text style.
+.primary-navigation .nav.more-nav > .nav-item > .nav-link {
+  color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+  font-feature-settings: 'liga' off, 'clig' off;
+  /* Small/Regular */
+  font-family: var(--Font-family-Body, Montserrat);
+  font-size: var(--Font-size-Small, 16px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Line-height-Small, 24px);
 }
 
 // Frontpage: hide the main scroll container and wunderbyte table pagination.
