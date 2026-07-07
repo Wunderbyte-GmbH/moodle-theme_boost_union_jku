@@ -252,6 +252,34 @@ background: var(--Primary-Light-1000, #4FB0BF); }
   margin: auto
 }
 
+// Override the wunderbyte_table plugin grid (350px cards, 10px padding, 20px gap).
+// Both selectors are needed: the filter_on variant must match the plugin's specificity.
+.wunderbyte-table-grid,
+.wunderbyte_table_filter_on .wunderbyte-table-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(363px, 1fr));
+    padding: 0;
+    gap: 12px;
+}
+
+// Align wunderbyte table filter, pagination and records count with the 1488px grid.
+.wb-records-count-label {
+    width: min(1488px, 100%);
+    margin: auto;
+}
+.wunderbyteTableFilter.row,
+.wbt-pagination-navs {
+  max-width: min(1488px, 100%);
+  margin: auto;
+}
+.form-control {
+  height: 48px;
+}
+
+.wunderbyte_table_container .wunderbyteTableFilter .dropdownMenuButton {
+  height: 48px;
+}
+
 .wb-news-edit-single .btn {
    background: gray;
 }
