@@ -302,7 +302,7 @@ background: var(--Primary-Light-1000, #4FB0BF); }
 
 /* L3030 */
 .wbfaqinput {
-    max-width: 628px !important;
+    max-width: 1000px !important;
     width: 100% !important;
     height: 55px !important;
     padding-left: 21px !important;
@@ -313,11 +313,12 @@ background: var(--Primary-Light-1000, #4FB0BF); }
 }
 
 .backgroundfaq {
-background: var(--Primary-Light-1000, #4FB0BF); 
+  background: var(--Primary-Light-1000, #4FB0BF); 
 }
 
 .local_wb_faq_container {
     margin-top: 50px;
+    max-width: min(1000px, 100%);
 }
 
 .lexa-faqcat {
@@ -403,7 +404,15 @@ background: var(--Primary-Light-1000, #4FB0BF);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #809FB8;
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    /* Tiny/Regular */
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Tiny, 14px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Line-height-Tiny, 20px); /* 142.857% */
 }
 
 .btn.wbfaqbreadcrumb {
