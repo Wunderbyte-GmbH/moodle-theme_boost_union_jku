@@ -621,20 +621,27 @@ h1, .h1 {
     text-underline-offset: auto;
 }
 
-// FAQ breadcrumb icons: Grid for level 0, Compass for deeper levels.
+// FAQ breadcrumb icons: Grid for level 1, Compass for level 2.
+// Each breadcrumb renders two divs (name + separator), so the level 1 name
+// is the 3rd child and the level 2 name the 5th.
 // The pix placeholders are resolved by Moodle's CSS post-processor.
-.wb-breadcrumb .wbfaqbreadcrumb[data-action="goto"]::before {
+.wb-breadcrumb .wbfaqbreadcrumb[data-action="goto"]:nth-child(3)::before,
+.wb-breadcrumb .wbfaqbreadcrumb[data-action="goto"]:nth-child(5)::before {
     content: '';
     display: inline-block;
     flex-shrink: 0;
     width: 20px;
     height: 20px;
     margin-right: 4px;
-    background: url([[pix:theme|icons/Compass]]) center / contain no-repeat;
+    background: center / contain no-repeat;
 }
 
-.wb-breadcrumb .wbfaqbreadcrumb[data-action="goto"]:first-child::before {
+.wb-breadcrumb .wbfaqbreadcrumb[data-action="goto"]:nth-child(3)::before {
     background-image: url([[pix:theme|icons/Grid]]);
+}
+
+.wb-breadcrumb .wbfaqbreadcrumb[data-action="goto"]:nth-child(5)::before {
+    background-image: url([[pix:theme|icons/Compass]]);
 }
 
 // FAQ page: remove main region padding.
