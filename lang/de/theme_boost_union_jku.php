@@ -36,6 +36,7 @@ defined('MOODLE_INTERNAL') || die();
 // Booking option description view (formerly provided by local_urise).
 $string['aboutoffer'] = 'Über das Angebot';
 $string['additionalinfo'] = 'Sonstige Informationen';
+$string['backtooverview'] = 'Zurück zur Übersicht';
 $string['coursecontent'] = 'Inhalte';
 $string['coursemethods'] = 'Methoden';
 $string['gotoprofile'] = 'Zum Profil';

@@ -55,6 +55,7 @@ $string['extrascssinheritancesetting_desc'] = 'With this setting, you control if
 // Booking option description view (formerly provided by local_urise).
 $string['aboutoffer'] = 'About the offer';
 $string['additionalinfo'] = 'Additional information';
+$string['backtooverview'] = 'Back to overview';
 $string['coursecontent'] = 'Content';
 $string['coursemethods'] = 'Methods';
 $string['gotoprofile'] = 'Profile';
