@@ -214,6 +214,28 @@ a {
 .searchbackground {
 background: var(--Primary-Light-1000, #4FB0BF); }
 
+// Card subtitle: Small/Regular text style, weak color, centered.
+.card-subtitle {
+    color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    /* Small/Regular */
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Line-height-Small, 24px);
+}
+
+// Search button (component_search template): dark fill per design.
+.searchbutton,
+.searchbutton:hover,
+.searchbutton:focus,
+.searchbutton:active {
+    background: var(--Fill-Strong, rgba(0, 0, 0, 0.90));
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+}
+
 .filterheader {
   background: linear-gradient(0deg, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 0%, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 100%), #FFF;
 }
