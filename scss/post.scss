@@ -599,3 +599,45 @@ h1, .h1 {
   border: none;
   background-color: var(--Primary-Light-50);
 }
+
+// Back-to-overview link (bookingoption_description_view): Tiny/Bold underlined.
+// Hover/focus included so the global teal a:hover rule does not override the color.
+.backtooverview,
+.backtooverview:hover,
+.backtooverview:focus {
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    /* Tiny/Bold underlined */
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Tiny, 14px);
+    font-style: normal;
+    font-weight: 700;
+    line-height: var(--Line-height-Tiny, 20px); /* 142.857% */
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+}
+
+// FAQ breadcrumb icons: Grid for level 0, Compass for deeper levels.
+// The pix placeholders are resolved by Moodle's CSS post-processor.
+.wb-breadcrumb .wbfaqbreadcrumb[data-action="goto"]::before {
+    content: '';
+    display: inline-block;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+    background: url([[pix:theme|icons/Compass]]) center / contain no-repeat;
+}
+
+.wb-breadcrumb .wbfaqbreadcrumb[data-action="goto"]:first-child::before {
+    background-image: url([[pix:theme|icons/Grid]]);
+}
+
+// FAQ page: remove main region padding.
+#page-local-wb_faq-index #page.drawers div[role="main"] {
+    padding: 0 !important;
+}
