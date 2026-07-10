@@ -648,3 +648,206 @@ h1, .h1 {
 #page-local-wb_faq-index #page.drawers div[role="main"] {
     padding: 0 !important;
 }
+
+// -----------------------------------------------------------------
+// Booking option cards (local_jku/table_card_row).
+// -----------------------------------------------------------------
+.booking-card {
+    display: grid;
+    grid-template-rows: 220px 1fr;
+    height: 100%;
+    max-width: 25rem;
+    border: 1px solid #d9d9d9;
+    background: #fff;
+}
+
+.booking-card__media {
+    height: 220px;
+    overflow: hidden;
+}
+
+.booking-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.booking-card__image-placeholder {
+    height: 100%;
+    background-color: #e6f0f7;
+    opacity: 0.8;
+    background-image: radial-gradient(#45aaf7 0.5px, #e6f0f7 0.5px);
+    background-size: 10px 10px;
+}
+
+.booking-card__content {
+    display: grid;
+    grid-template-rows:
+        3.5rem
+        8.5rem
+        8rem
+        1fr
+        3.5rem
+        4rem;
+    gap: 1rem;
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.booking-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: 3.5rem;
+}
+
+.booking-card__titlearea {
+    min-height: 8.5rem;
+}
+
+// Heading 4/Bold.
+.booking-card__title {
+    margin: 0;
+    color: var(--interface-dark_primary, #0B131F);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: var(--Font-family-Heading, Montserrat);
+    font-size: var(--Font-size-Heading-4, 18px);
+    font-style: normal;
+    font-weight: 700;
+    line-height: var(--Line-height-Heading-4, 24px); /* 133.333% */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    a {
+        color: inherit;
+    }
+}
+
+.booking-card__descriptionarea {
+    min-height: 8rem;
+}
+
+// Tiny/Regular.
+.booking-card__description {
+    color: var(--interface-dark_secondary, #242A3A);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Tiny, 14px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Line-height-Tiny, 20px); /* 142.857% */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.booking-card__metaarea {
+    min-height: 8rem;
+}
+
+.booking-card__meta {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.booking-card__meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    i {
+        flex: 0 0 1.25rem;
+    }
+}
+
+// Tiny/Bold.
+.booking-card__meta-value {
+    color: var(--interface-dark_secondary, #242A3A);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Tiny, 14px);
+    font-style: normal;
+    font-weight: 700;
+    line-height: var(--Line-height-Tiny, 20px); /* 142.857% */
+}
+
+.booking-card__tagsarea {
+    min-height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.booking-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.booking-card__tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--Spacing-16, 16px);
+    border: 1px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+    background: var(--Fill-Weak, rgba(0, 0, 0, 0.04));
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.booking-card__actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+    min-height: 4rem;
+}
+
+.wunderbyteTableJavascript[data-location*="online" i] li[title="Location"] .fa-map-marker::before {
+    content: "\f1eb" !important; /* fa-wifi */
+}
+
+.booking-card__capacity {
+    margin-left: auto;
+
+    a {
+        text-decoration: none;
+    }
+
+    .col-ap-availableplaces {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        min-width: 5.6rem;
+        height: 3rem;
+        padding: 0 0.8rem;
+        border: 2px solid currentColor;
+        background: #fff;
+        line-height: 1;
+        white-space: nowrap;
+
+        span {
+            display: inline-block;
+        }
+    }
+
+    .svg-icon {
+        width: 1.45rem;
+        height: 1.45rem;
+        flex: 0 0 auto;
+        display: block;
+    }
+
+    .text-dark {
+        font-weight: 700;
+        line-height: 1;
+    }
+}

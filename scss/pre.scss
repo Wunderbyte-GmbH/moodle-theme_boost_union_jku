@@ -16,6 +16,7 @@ $body-color: rgba(0, 0, 0, 0.90);
 $body-bg: #fff;
 
 $interface-dark-primary: #0B131F;
+$interface-dark-secondary: #242A3A;
 $text-weak: rgba(0, 0, 0, 0.60);
 $text-strong: rgba(0, 0, 0, 0.90);
 
@@ -45,6 +46,9 @@ $font-family-sans-serif: "Montserrat", sans-serif;
 
 $font-size-base: 1rem; // 16px
 $line-height-base: 1.5; // 24px
+
+$font-size-tiny: 0.875rem; // 14px
+$line-height-tiny: 1.25rem; // 20px
 
 $headings-font-family: "Montserrat", sans-serif;
 $headings-line-height: 1.333; // 24px / 18px
@@ -134,6 +138,7 @@ $link-shade-percentage: 15%;
   --Stroke-Brand-weak: #{$primary-border-subtle};
   --Fill-Brand-weak: #{$primary-bg-subtle};
   --interface-dark_primary: #{$interface-dark-primary};
+  --interface-dark_secondary: #{$interface-dark-secondary};
   --Font-family-Heading: #{$headings-font-family};
   --Font-size-Heading-4: #{$h4-font-size};
   --Line-height-Heading-4: 24px;
@@ -149,6 +154,8 @@ $link-shade-percentage: 15%;
   --Font-family-Body: #{$font-family-base};
   --Font-size-Small: #{$font-size-base};
   --Line-height-Small: #{$font-size-base * $line-height-base};
+  --Font-size-Tiny: #{$font-size-tiny};
+  --Line-height-Tiny: #{$line-height-tiny};
   --Stroke-Brand-strong: #{$primary-border-strong};
   --Spacing-8: #{map-get($spacers, 1)};
   --Text-Weak: #{$text-weak};
