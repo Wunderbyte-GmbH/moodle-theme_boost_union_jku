@@ -929,3 +929,67 @@ h1, .h1 {
         }
     }
 }
+
+// On hover the whole course card (grid cards and list rows) gets a
+// strong border. The divider inside the list rows keeps its weak color.
+.booking-card:hover {
+    border: 2px solid var(--Grey-slate-solid-1000, #000);
+}
+
+// -----------------------------------------------------------------
+// Active filter chips (local_jku/filterchips): one removable chip
+// per selected filter value, rendered below the filter area.
+// -----------------------------------------------------------------
+.jku-filter-chips {
+    display: none;
+
+    &.haschips {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+        background: #fff;
+    }
+}
+
+.jku-filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--Spacing-24, 24px);
+    border: 1px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+    background: #fff;
+    color: var(--interface-dark_primary, #0B131F);
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        border-color: var(--Grey-slate-solid-1000, #000);
+        background: var(--Fill-Weak, rgba(0, 0, 0, 0.04));
+    }
+
+    i {
+        font-size: 0.85em;
+    }
+}
+
+// The reset chip ("show all records") is highlighted in primary color.
+.jku-filter-chip.jku-filter-chip--reset {
+    background: var(--Primary-Light-1000, #4FB0BF);
+    border-color: var(--Primary-Light-1000, #4FB0BF);
+    color: #fff;
+
+    &:hover,
+    &:focus {
+        background: #3a8b95;
+        border-color: #3a8b95;
+        color: #fff;
+    }
+}
