@@ -109,6 +109,7 @@ class mod_booking_renderer extends \mod_booking\output\renderer {
 
         // Build metaitems array for the detail view template (mirrors the card table subcolumns).
         $metaitems = [];
+
         if (!empty($data['dayofweektime'])) {
             $metaitems[] = [
                 'value' => $data['dayofweektime'],
