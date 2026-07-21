@@ -113,6 +113,14 @@ a {
   border-width: 2px;
 }
 
+.wunderbyte-table-grid .list-group-item + .list-group-item {
+  border-top: 2px solid rgba(0, 0, 0, 0.125);
+}
+
+.wunderbyte-table-grid .list-group-item:hover {
+  border: 2px solid var(--Grey-slate-solid-1000, #000);
+}
+
 #theme-block-region-outside-top {
     .block .card-body {
         padding: 0 !important;
