@@ -80,7 +80,8 @@ $spacers: (
     1: 0.5rem,  // 8px
     2: 1rem,    // 16px
     3: 2.5rem,  // 40px
-    4: 5rem     // 80px
+    4: 5rem,    // 80px
+    5: 3rem     // 48px - Bootstrap's default key 5 must exist, core and Boost Union @extend .pt-5 etc.
 );
 
 $spacers: map-merge(

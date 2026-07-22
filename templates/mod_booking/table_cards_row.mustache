@@ -56,6 +56,7 @@
         <div class="booking-card__tagsarea">
             {{#hastags}}
                 <div class="booking-card__tags">
+                {{#tags.0}}<i class="fa fa-hashtag text-primary" aria-hidden="true"></i>{{/tags.0}}
                     {{#tags}}
                         <span class="booking-card__tag">{{{value}}}</span>
                     {{/tags}}
