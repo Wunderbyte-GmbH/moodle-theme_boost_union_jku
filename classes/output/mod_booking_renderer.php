@@ -161,7 +161,6 @@ class mod_booking_renderer extends \mod_booking\output\renderer {
         $settings = singleton_service::get_instance_of_booking_option_settings((int)$id);
 
         if (isset($settings->customfields) && isset($settings->customfields['kompetenzen'])) {
-
             if (is_array($settings->customfields['kompetenzen'])) {
                 $competencies = $settings->customfields['kompetenzen'];
             } else {
@@ -245,4 +244,3 @@ class mod_booking_renderer extends \mod_booking\output\renderer {
         }
     }
 }
-
