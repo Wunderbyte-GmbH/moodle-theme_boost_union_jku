@@ -660,25 +660,26 @@ h1, .h1 {
 // -----------------------------------------------------------------
 // Booking option cards (local_jku/table_card_row).
 // -----------------------------------------------------------------
-.booking-card {
+// Scoped to the card grid so the list variant (booking-card--list) and the
+// detail view, which reuse the sub-element classes, are not affected.
+.wunderbyte-table-grid .booking-card {
     display: grid;
-    grid-template-rows: 220px 1fr;
+    grid-template-rows: 220px minmax(0, 1fr);
     height: 100%;
-    max-width: 25rem;
-    border: 1px solid #d9d9d9;
+    overflow: hidden;
     background: #fff;
 }
 
-.booking-card__media {
-    height: 220px;
+.wunderbyte-table-grid .booking-card__media {
+    min-height: 0;
     overflow: hidden;
 }
 
-.booking-card__image {
+.wunderbyte-table-grid .booking-card__media img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
 
 .booking-card__image-placeholder {
