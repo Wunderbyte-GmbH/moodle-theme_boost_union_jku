@@ -1949,3 +1949,49 @@ h1, .h1 {
     justify-content: flex-end;
     flex: 1 1 auto;
 }
+
+// Dashboard pages (local/jku/admindashboard.php and dashboard.php): the moodle
+// navbar stays, the page header is removed and the content starts directly
+// below the navbar without any paddings or margins in between.
+#page-local-jku-admindashboard,
+#page-local-jku-dashboard {
+    #page-header,
+    .secondary-navigation {
+        display: none;
+    }
+
+    #page.drawers {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #topofscroll,
+    #page-content {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: none;
+    }
+
+    .main-inner-wrapper {
+        padding: 0;
+        margin: 0;
+    }
+
+    #topofscroll,
+    #region-main {
+        background: transparent;
+        border: none;
+    }
+}
+
+// Only the admin dashboard: the vue app brings its own hero, its duplicated
+// site header is hidden and the tinted wrapper background is dropped.
+#page-local-jku-admindashboard {
+    .siteheader {
+        display: none;
+    }
+
+    .main-inner-wrapper {
+        background: transparent;
+    }
+}
