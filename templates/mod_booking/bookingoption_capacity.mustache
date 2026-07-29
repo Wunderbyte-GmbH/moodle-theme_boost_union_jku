@@ -1,0 +1,53 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_boost_union_jku/mod_booking/bookingoption_capacity
+
+    Booking status badge for the option detail view (Figma "BookingStatus"):
+    green outlined box with the family-heart icon and booked/maxanswers count.
+
+    Example context (json):
+    {
+        "capacity": {
+            "booked": 2,
+            "maxanswers": 30,
+            "fullybooked": false
+        }
+    }
+}}
+{{#capacity}}
+<span class="jku-capacity {{#fullybooked}}jku-capacity--full{{/fullybooked}}">
+    <svg class="jku-capacity__icon" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g clip-path="url(#jkuCapacityHeart)">
+            <path d="M1.97662 5.25C1.97662 5.94619 2.25318 6.61387 2.74546 7.10616C3.23774 7.59844 3.90542 7.875 4.60161 7.875C5.29781 7.875 5.96549 7.59844 6.45777 7.10616C6.95005 6.61387 7.22662 5.94619 7.22662 5.25C7.22662 4.55381 6.95005 3.88613 6.45777 3.39384C5.96549 2.90156 5.29781 2.625 4.60161 2.625C3.90542 2.625 3.23774 2.90156 2.74546 3.39384C2.25318 3.88613 1.97662 4.55381 1.97662 5.25Z" stroke="currentColor" stroke-width="1.3125" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6.77862 9.84359C6.18535 9.44994 5.49645 9.22452 4.78524 9.19132C4.07403 9.15812 3.36712 9.31837 2.73976 9.65504C2.1124 9.9917 1.58807 10.4922 1.22256 11.1032C0.857055 11.7142 0.664059 12.4129 0.664115 13.1248" stroke="currentColor" stroke-width="1.3125" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19.6954 13.1248C19.6954 12.4129 19.5024 11.7142 19.1369 11.1032C18.7714 10.4922 18.2471 9.9917 17.6197 9.65504C16.9924 9.31837 16.2855 9.15812 15.5743 9.19132C14.863 9.22452 14.1741 9.44994 13.5809 9.84359" stroke="currentColor" stroke-width="1.3125" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.1329 5.25C13.1329 5.94619 13.4094 6.61387 13.9017 7.10616C14.394 7.59844 15.0617 7.875 15.7579 7.875C16.4541 7.875 17.1218 7.59844 17.614 7.10616C18.1063 6.61387 18.3829 5.94619 18.3829 5.25C18.3829 4.55381 18.1063 3.88613 17.614 3.39384C17.1218 2.90156 16.4541 2.625 15.7579 2.625C15.0617 2.625 14.394 2.90156 13.9017 3.39384C13.4094 3.88613 13.1329 4.55381 13.1329 5.25Z" stroke="currentColor" stroke-width="1.3125" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.1329 5.25C13.1329 5.25 13.1329 8.53125 11.1641 8.53125" stroke="currentColor" stroke-width="1.3125" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18.3829 5.25C18.3829 5.25 18.3829 8.53125 20.3516 8.53125" stroke="currentColor" stroke-width="1.3125" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7.88288 13.125C7.88288 13.6471 8.0903 14.1479 8.45951 14.5171C8.82873 14.8863 9.32948 15.0937 9.85163 15.0938C10.3738 15.0937 10.8745 14.8863 11.2437 14.5171C11.613 14.1479 11.8204 13.6471 11.8204 13.125C11.8204 12.6029 11.613 12.1021 11.2437 11.7329C10.8745 11.3637 10.3738 11.1562 9.85163 11.1562C9.32948 11.1562 8.82873 11.3637 8.45951 11.7329C8.0903 12.1021 7.88288 12.6029 7.88288 13.125Z" stroke="currentColor" stroke-width="1.3125" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.2615 17.7188C12.9158 17.1204 12.4188 16.6236 11.8204 16.2782C11.2219 15.9328 10.5431 15.7509 9.85207 15.7509C9.16107 15.7509 8.48225 15.9328 7.88378 16.2782C7.28532 16.6236 6.78829 17.1204 6.44263 17.7188" stroke="currentColor" stroke-width="1.3125" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <defs>
+            <clipPath id="jkuCapacityHeart">
+                <rect width="21" height="21" fill="white"/>
+            </clipPath>
+        </defs>
+    </svg>
+    <span class="jku-capacity__count">{{booked}}{{#maxanswers}}/{{maxanswers}}{{/maxanswers}}</span>
+</span>
+{{/capacity}}

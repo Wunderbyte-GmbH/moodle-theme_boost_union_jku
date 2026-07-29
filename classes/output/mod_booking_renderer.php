@@ -25,6 +25,9 @@
 
 namespace theme_boost_union_jku\output;
 
+use local_jku\filters\newcoursefilter;
+use local_jku\shortcodes as jku_shortcodes;
+use mod_booking\customfield\booking_handler;
 use mod_booking\output\bookingoption_description;
 use mod_booking\output\col_availableplaces;
 use mod_booking\output\col_coursestarttime;
@@ -121,7 +124,14 @@ class mod_booking_renderer extends \mod_booking\output\renderer {
             $metaitems[] = [
                 'value' => $data['abhaltungssprache'],
                 'itemkey' => 'language',
-                'icon' => 'fa fa-commenting-o fa-fw text-primary',
+                'icon' => 'fa fa-comment-o fa-fw text-primary',
+            ];
+        }
+        if (!empty($data['format'])) {
+            $metaitems[] = [
+                'value' => $data['format'],
+                'itemkey' => 'format',
+                'icon' => 'fa fa-map-marker fa-fw text-primary',
             ];
         }
         if (!empty($data['location'])) {
@@ -138,12 +148,62 @@ class mod_booking_renderer extends \mod_booking\output\renderer {
             $data['entities'] = $settings->entity;
         }
 
-        $optionid = $data['modalcounter'] ?? 0;
-        // Use the renderer to output this column.
-        $lang = current_language();
+        // Booking status badge (booked/maxanswers with the heart icon).
+        $bookinginformation = (array)($data['bookinginformation'] ?? []);
+        $maxanswers = $bookinginformation['maxanswers'] ?? 0;
+        $data['capacity'] = [
+            'booked' => (int)($bookinginformation['booked'] ?? 0),
+            'maxanswers' => is_numeric($maxanswers) ? (int)$maxanswers : 0,
+            'fullybooked' => !empty($bookinginformation['fullybooked']),
+        ];
+
+        // "NEU" badge for recently created options (same window as the card grid).
+        $data['newbadge'] = !empty($settings->timecreated)
+            && $settings->timecreated >= newcoursefilter::get_threshold();
+
+        // Localized course category labels (mirrors jku_table::col_kurskategorie).
+        $data['kategorien'] = $this->get_kurskategorie_labels($settings);
 
         $o .= $this->render_from_template('mod_booking/bookingoption_description_view', $data);
         return $o;
+    }
+
+    /**
+     * Resolve the localized labels of the kurskategorie custom field values.
+     *
+     * @param \mod_booking\booking_option_settings $settings booking option settings
+     * @return array localized category labels
+     */
+    private function get_kurskategorie_labels($settings): array {
+        if (empty($settings->customfields['kurskategorie'])) {
+            return [];
+        }
+
+        $categories = $settings->customfields['kurskategorie'];
+        if (!is_array($categories)) {
+            $categories = explode(',', (string)$categories);
+        }
+
+        static $options = null;
+        if ($options === null) {
+            $options = [];
+            foreach (booking_handler::get_customfields() as $customfield) {
+                if ($customfield->shortname === 'kurskategorie') {
+                    $options = jku_shortcodes::get_customfield_options($customfield);
+                    break;
+                }
+            }
+        }
+
+        $labels = [];
+        foreach ($categories as $category) {
+            $category = trim((string)$category);
+            if ($category === '') {
+                continue;
+            }
+            $labels[] = $options[$category] ?? format_string($category);
+        }
+        return $labels;
     }
 
     /**

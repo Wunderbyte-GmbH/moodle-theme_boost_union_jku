@@ -24,6 +24,9 @@ $text-strong: rgba(0, 0, 0, 0.90);
 $fill-weak: rgba(0, 0, 0, 0.04);
 $fill-strong: rgba(0, 0, 0, 0.90);
 
+// Stroke colors
+$stroke-strong: rgba(0, 0, 0, 0.45);
+
 // Brand colors
 $primary-text-emphasis: #001F33;
 $primary-bg-subtle: rgba(79, 176, 191, 0.05);
@@ -91,10 +94,15 @@ $spacers: map-merge(
         12: 12px,
         15: 15px,
         16: 16px,
+        18: 18px,
+        20: 20px,
         24: 24px,
         32: 32px,
+        39: 39px,
+        40: 40px,
         47: 47px,
         48: 48px,
+        60: 60px,
         64: 64px,
         66: 66px
     )
@@ -133,6 +141,8 @@ $link-shade-percentage: 15%;
 :root {
   --Primary-Light-1000: #{$primary};
   --Green-Light-1000: #{$success};
+  --Amber-Light-1000: #8F6C1A;
+  --Red-Light-1000: #D95C4C;
   --Spacing-16: #{$font-size-base};
   --Stroke-Weak: #{$border-color};
   --Fill-Weak: #{$fill-weak};
@@ -141,8 +151,11 @@ $link-shade-percentage: 15%;
   --interface-dark_primary: #{$interface-dark-primary};
   --interface-dark_secondary: #{$interface-dark-secondary};
   --Font-family-Heading: #{$headings-font-family};
+  --Font-size-Heading-2: 32px;
+  --Line-height-Heading-2: 38px;
   --Font-size-Heading-4: #{$h4-font-size};
   --Line-height-Heading-4: 24px;
+  --Stroke-Strong: #{$stroke-strong};
   --brand_primary-900: #{$primary-text-emphasis};
   --Primary-Light-50: #{$primary-bg-subtle};
   --Fill-Strong: #{$fill-strong};

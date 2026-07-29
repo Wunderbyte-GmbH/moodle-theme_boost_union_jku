@@ -63,6 +63,7 @@ $string['optiondates'] = 'Date(s)';
 $string['orgacontact'] = 'Contact for content-related inquiries';
 $string['requirements'] = 'Requirements';
 $string['showdates'] = 'Show dates';
+$string['similarcourses'] = 'Similar events';
 $string['teachers'] = 'Teacher';
 $string['termsandconditions'] = 'With booking I accept the&nbsp;<a href="{$a}" target="_blank">terms and conditions</a>.';
 

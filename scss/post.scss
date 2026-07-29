@@ -188,39 +188,73 @@ a {
 }
 
 
-.lexa-tabs {
-    border-bottom: 2px solid #61bfcc;
-    background: #f5fbfc;
-}
-
-.lexa-tabs .nav-link {
-    border: 0;
-    color: #666;
-    font-size: 1.4rem;
-    font-weight: 600;
-    padding: 1rem 1.5rem;
-}
-
-.lexa-tabs .nav-link i {
-    margin-right: .6rem;
-    color: #8a8f91;
-}
-
-.lexa-tabs .nav-link.active {
-    color: #55b8c7;
-    background: transparent;
-    border-bottom: 4px solid #55b8c7;
-}
-
-.lexa-tabs .nav-link.active i {
-    color: #55b8c7;
-}
-
-.lexa-tab-content {
-    padding-top: 1.5rem;
-}
 .searchbackground {
-background: var(--Primary-Light-1000, #4FB0BF); }
+    background: var(--Primary-Light-1000, #4FB0BF);
+
+    // Hero per Figma: H1 47px from the top (mt-47 utility on the h1),
+    // 24px gap to the 901px centered search field, 66px below it (mb-66).
+    h1 {
+        margin-bottom: map-get($spacers, 24);
+    }
+
+    .wunderbyteTableSearch.jku {
+        width: min(901px, 100%);
+        margin-left: auto;
+        margin-right: auto;
+
+        .search {
+            flex: 1 1 auto;
+        }
+    }
+}
+
+// Mobile hero per Figma (node 11759-20060): 60px from the band top to the
+// centered 32px/38px heading, 18px gap to the 48px-tall search field with
+// 20px side margins, 39px below it. The search button disappears and the
+// magnifier moves into the field as a leading icon (24px box inset 16px,
+// 8px gap to the text). Searching still works on Enter without the button.
+@include media-breakpoint-down(sm) {
+    .searchbackground {
+        padding: map-get($spacers, 60) map-get($spacers, 20) map-get($spacers, 39);
+
+        // The templates wrap the hero in a .row; drop its gutters and the
+        // mb-2 so the band padding alone defines the 20px side / 39px bottom.
+        .row {
+            --bs-gutter-x: 0;
+            margin-bottom: 0 !important; // stylelint-disable-line declaration-no-important
+        }
+
+        h1 {
+            // The h1 carries mt-47 / mb-4 spacing utilities depending on the
+            // container template; both are !important, so beat them here.
+            margin: 0 0 map-get($spacers, 18) !important; // stylelint-disable-line declaration-no-important
+            font-size: var(--Font-size-Heading-2, 32px);
+            line-height: var(--Line-height-Heading-2, 38px);
+        }
+
+        .wunderbyteTableSearch.jku {
+            margin-bottom: 0 !important; // beat the mb-66 utility, see above. stylelint-disable-line declaration-no-important
+            min-width: 0; // the plugin's mobile min-width (100vw - 100px) breaks the 20px side margins
+
+            .search {
+                height: map-get($spacers, 48);
+                padding-left: map-get($spacers, 48);
+                border: 1px solid var(--Stroke-Strong, rgba(0, 0, 0, 0.45));
+                border-radius: map-get($spacers, 8);
+                // Figma-exported magnifier (20px leaf of the 24px icon box).
+                background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M19 19L14.65 14.65M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z' stroke='black' stroke-opacity='0.45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat 18px center;
+
+                &::placeholder {
+                    color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+                }
+            }
+
+            .searchbutton {
+                display: none !important; // beat the d-flex utility. stylelint-disable-line declaration-no-important
+            }
+        }
+    }
+}
 
 // Card subtitle: Small/Regular text style, weak color, centered.
 .card-subtitle {
@@ -244,8 +278,24 @@ background: var(--Primary-Light-1000, #4FB0BF); }
     box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
 }
 
-.filterheader {
-  background: linear-gradient(0deg, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 0%, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 100%), #FFF;
+// The tinted band comes from the .jku-filter-bg wrapper; keep the inner
+// filterheader transparent (also overrides the wunderbyte_table plugin fill).
+.filterheader,
+.wunderbyte_table_container.showontop .filterheader {
+  background: transparent;
+}
+
+// Filter band per Figma: 20px vertical padding on the tinted background,
+// selects wrap centered with 12px row and 15px column gaps.
+.jku-filter-bg {
+    padding-top: map-get($spacers, 20);
+    padding-bottom: map-get($spacers, 20);
+    background: linear-gradient(0deg, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 0%, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 100%), #FFF;
+}
+
+.jku-filter-bg .wunderbyteTableFilter.row {
+    justify-content: center;
+    gap: map-get($spacers, 12) map-get($spacers, 15);
 }
 
 .wunderbyte_table_components  {
@@ -267,13 +317,26 @@ background: var(--Primary-Light-1000, #4FB0BF); }
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(363px, 1fr));
     padding: 0;
-    gap: 12px;
+    // Figma: 40px between card rows, 12px between columns.
+    gap: map-get($spacers, 40) map-get($spacers, 12);
 }
 
 // Align wunderbyte table filter, pagination and records count with the 1488px grid.
+// The count label is the "12 Ergebnisse ..." line: Heading 3/Bold, 40px above per Figma.
 .wb-records-count-label {
     width: min(1488px, 100%);
     margin: auto;
+    padding-top: map-get($spacers, 40);
+    color: var(--interface-dark_primary, #0B131F);
+    font-family: var(--Font-family-Heading, Montserrat);
+    font-size: $h2-font-size; // 24px
+    font-weight: 700;
+    line-height: 36px;
+}
+
+// Pagination sits 40px below the card grid (template uses mt-4 = 80px).
+.wunderbyteTableClass > .mt-4 {
+    margin-top: map-get($spacers, 40) !important;
 }
 .wunderbyteTableFilter.row,
 .wbt-pagination-navs {
@@ -286,6 +349,58 @@ background: var(--Primary-Light-1000, #4FB0BF); }
 
 .wunderbyte_table_container .wunderbyteTableFilter .dropdownMenuButton {
   height: 48px;
+}
+
+// -----------------------------------------------------------------
+// Wunderbyte table filter (wunderbyterFilterList): full-row clickable
+// entries with a highlight on the checked row. The plugin's styles.css
+// paints its own checkbox with ::before/::after on the label — removed
+// here, the row highlight indicates the selection instead.
+// -----------------------------------------------------------------
+.wunderbyteTableFilter .form-check-label::before,
+.wunderbyteTableFilter .form-check-label::after {
+    content: none;
+}
+
+.wunderbyterFilterList li.form-check {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+}
+
+.wunderbyterFilterList li.form-check .form-check-label {
+    display: block;
+    padding: .5rem 1rem .5rem .5rem;
+    cursor: pointer;
+    width: 100%;
+    margin: 0;
+}
+
+.wunderbyterFilterList li.form-check .form-check-input {
+    position: absolute;
+    left: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    cursor: pointer;
+}
+
+.wunderbyterFilterList li.form-check:has(.form-check-input:checked) {
+    background-color: #e7f3ff;
+    border-left: 3px solid #3a8b95;
+}
+
+.wunderbyterFilterList li.form-check:has(.form-check-input:checked) .form-check-label {
+    color: #3a8b95;
+    font-weight: 500;
+}
+
+.wunderbyterFilterList li.form-check:has(.form-check-input:checked):hover {
+    background-color: #3a8b95;
+}
+
+.wunderbyterFilterList li.form-check:has(.form-check-input:checked):hover .form-check-label {
+    color: #fff;
 }
 
 .wb-news-edit-single .btn {
@@ -664,7 +779,7 @@ h1, .h1 {
 // detail view, which reuse the sub-element classes, are not affected.
 .wunderbyte-table-grid .booking-card {
     display: grid;
-    grid-template-rows: 220px minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
     height: 100%;
     overflow: hidden;
     background: #fff;
@@ -673,6 +788,8 @@ h1, .h1 {
 .wunderbyte-table-grid .booking-card__media {
     min-height: 0;
     overflow: hidden;
+    // Figma: image is 363x193 within the 363px card.
+    aspect-ratio: 363 / 193;
 }
 
 .wunderbyte-table-grid .booking-card__media img {
@@ -699,8 +816,8 @@ h1, .h1 {
         1fr
         3.5rem
         4rem;
-    gap: 1rem;
-    padding: 1.5rem;
+    gap: map-get($spacers, 16);
+    padding: map-get($spacers, 24);
     height: 100%;
 }
 
@@ -763,13 +880,13 @@ h1, .h1 {
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 0.75rem;
+    gap: map-get($spacers, 12);
 }
 
 .booking-card__meta-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: map-get($spacers, 12);
 
     i {
         flex: 0 0 1.25rem;
@@ -796,7 +913,7 @@ h1, .h1 {
 .booking-card__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: map-get($spacers, 8);
 }
 
 .booking-card__tag {
@@ -814,13 +931,19 @@ h1, .h1 {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 0.75rem;
+    gap: map-get($spacers, 8);
     margin-top: auto;
     min-height: 4rem;
 }
 
 .wunderbyteTableJavascript[data-location*="online" i] li[title="Location"] .fa-map-marker::before {
     content: "\f1eb" !important; /* fa-wifi */
+}
+
+// The family-heart icon belongs to the capacity badge design; hide it where
+// the availableplaces column renders as plain text (e.g. report tables).
+.col-ap-availableplaces .svg-icon {
+    display: none;
 }
 
 .booking-card__capacity {
@@ -834,25 +957,50 @@ h1, .h1 {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 0.45rem;
+        gap: 5px; // Figma: 5px between icon and count.
         min-width: 5.6rem;
-        height: 3rem;
-        padding: 0 0.8rem;
-        border: 2px solid currentColor;
-        background: #fff;
+        height: map-get($spacers, 40);
+        padding: 0 map-get($spacers, 8);
+        border: 2px solid var(--Green-Light-1000, #5BA755);
+        background: transparent;
         line-height: 1;
         white-space: nowrap;
 
         span {
             display: inline-block;
         }
+
+        &.lowavail {
+            border-color: var(--Amber-Light-1000, #8F6C1A);
+
+            .svg-icon {
+                color: var(--Amber-Light-1000, #8F6C1A);
+            }
+        }
+
+        &.fullavail {
+            border-color: var(--Red-Light-1000, #D95C4C);
+
+            .svg-icon {
+                color: var(--Red-Light-1000, #D95C4C);
+            }
+        }
+
+        // Figma: count is Text/Strong in every availability state; the border
+        // and icon carry the state colour instead.
+        .text-dark,
+        .text-darkgreen,
+        .text-danger {
+            color: var(--Text-Strong, rgba(0, 0, 0, 0.90)) !important;
+        }
     }
 
     .svg-icon {
-        width: 1.45rem;
-        height: 1.45rem;
+        width: 21px; // Figma: 21px family-heart icon.
+        height: 21px;
         flex: 0 0 auto;
         display: block;
+        color: var(--Green-Light-1000, #5BA755);
     }
 
     .text-dark {
@@ -892,8 +1040,8 @@ h1, .h1 {
         max-width: 75%;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        padding: 1.5rem;
+        gap: map-get($spacers, 16);
+        padding: map-get($spacers, 24);
     }
 
     .booking-card__side {
@@ -901,8 +1049,8 @@ h1, .h1 {
         max-width: 25%;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        padding: 1.5rem;
+        gap: map-get($spacers, 16);
+        padding: map-get($spacers, 24);
         border-left: 2px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
         border-radius: 0 10px 10px 0;
     }
@@ -957,25 +1105,27 @@ h1, .h1 {
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1.5rem;
-        border-bottom: 1px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
-        background: #fff;
+        // Figma: 8px chip gap, 16px vertical padding, primary line on top.
+        gap: map-get($spacers, 8);
+        padding: map-get($spacers, 16) map-get($spacers, 24);
+        border-top: 1px solid var(--Primary-Light-1000, #4FB0BF);
     }
 }
 
+// Chips match the Figma badge: 32px high, 16px radius, brand-weak fill.
 .jku-filter-chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1.25rem;
-    border-radius: var(--Spacing-24, 24px);
-    border: 1px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
-    background: #fff;
-    color: var(--interface-dark_primary, #0B131F);
+    gap: 4px; // No 4px step in $spacers; key 4 is Bootstrap's 5rem.
+    height: map-get($spacers, 32);
+    padding: 0 map-get($spacers, 12);
+    border-radius: map-get($spacers, 16);
+    border: 1px solid var(--Stroke-Brand-weak, rgba(79, 176, 191, 0.20));
+    background: var(--Fill-Brand-weak, rgba(79, 176, 191, 0.05));
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
     font-family: var(--Font-family-Body, Montserrat);
     font-size: var(--Font-size-Small, 16px);
-    line-height: 1;
+    line-height: var(--Line-height-Small, 24px);
     cursor: pointer;
 
     &:hover,
@@ -989,17 +1139,250 @@ h1, .h1 {
     }
 }
 
-// The reset chip ("show all records") is highlighted in primary color.
+// The reset chip ("Alle entfernen") gets the 80% primary fill per Figma.
 .jku-filter-chip.jku-filter-chip--reset {
-    background: var(--Primary-Light-1000, #4FB0BF);
-    border-color: var(--Primary-Light-1000, #4FB0BF);
-    color: #fff;
+    background: var(--Stroke-Brand-strong, rgba(79, 176, 191, 0.80));
+    border-color: var(--Stroke-Brand-weak, rgba(79, 176, 191, 0.20));
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
 
     &:hover,
     &:focus {
-        background: #3a8b95;
-        border-color: #3a8b95;
-        color: #fff;
+        background: var(--Primary-Light-1000, #4FB0BF);
+        border-color: var(--Primary-Light-1000, #4FB0BF);
+        color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    }
+}
+
+// -----------------------------------------------------------------
+// Mobile frontpage (Figma 00_Startpage_390px, node 11756:38701).
+// All frontpage elements get their phone layout below the md
+// breakpoint; tablet and up keep the desktop design.
+// -----------------------------------------------------------------
+@include media-breakpoint-down(md) {
+
+    // Navigation header: the Boost navbar hides the brand logo on
+    // mobile (d-none d-md-flex) but the design shows burger + logo.
+    .navbar .navbar-brand {
+        display: flex !important;
+    }
+
+    .navbar .navbar-brand,
+    .navbar .navbar-brand .logo {
+        padding-left: 0;
+    }
+
+    .navbar > .container-fluid {
+        padding: 0 map-get($spacers, 20);
+    }
+
+    // Headings: hero title uses Heading 2 (32/38), section titles
+    // ("Bevorstehende Veranstaltungen", "Themen nach Kategorie")
+    // use Heading 3 (24/36).
+    h1, .h1 {
+        font-size: 2rem; // 32px
+        line-height: 2.375rem; // 38px
+    }
+
+    #theme-block-region-outside-top .block_html .no-overflow > .container > h1,
+    #theme-block-region-outside-bottom .block_html .no-overflow > .container > h1,
+    .wbtablefilterview h2 {
+        font-size: 1.5rem; // 24px
+        line-height: 2.25rem; // 36px
+    }
+
+    // Section headings sit in zero-padding containers ($container-padding-x: 0);
+    // the design keeps 20px side margins.
+    #theme-block-region-outside-top .block_html .no-overflow > .container,
+    #theme-block-region-outside-bottom .block_html .no-overflow > .container {
+        padding: 0 map-get($spacers, 20);
+    }
+
+    // Hero: 300px image, the white content card overlaps it by 67px
+    // with 20px side margins and 40px inner padding.
+    .wb_news_hero .image-container img {
+        height: 300px;
+    }
+
+    .wb_news_hero .wb_news_hero_box {
+        position: relative;
+        // Neutralize the offsets of the plugin's absolute positioning.
+        top: auto;
+        right: auto;
+        left: auto;
+        transform: none;
+        width: calc(100% - 40px);
+        margin: -67px auto 0;
+    }
+
+    #theme-block-region-outside-top .card.wb_news_hero_box .card-body {
+        padding: map-get($spacers, 40) !important;
+    }
+
+    .wb_news_hero_box h1 {
+        margin: 0 0 map-get($spacers, 24);
+    }
+
+    // Hero buttons: full width, 48px high, stacked with a 16px gap.
+    .wb_news_hero_box .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: map-get($spacers, 48);
+    }
+
+    .wb_news_hero_box .btn + .btn {
+        margin-top: map-get($spacers, 16);
+    }
+
+    // Infoslides ("Veranstaltungen" cards): one card per view in a
+    // swipeable scroll-snap carousel instead of stacked columns.
+    .wb-news-container .row.card-deck {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin: 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        > [class*="col-"] {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0 13px; // 364px card on a 390px viewport.
+            margin-bottom: map-get($spacers, 24);
+            scroll-snap-align: center;
+        }
+    }
+
+    // Figma: 213x198 slide image (the template inlines height: 264px).
+    .wb_news .card.infoslide .infoslideimg {
+        height: 198px !important;
+
+        .wb_news-headerimage {
+            max-height: 198px !important;
+        }
+    }
+
+    // Course tiles (Kurskachel): full-bleed cards separated by a
+    // 2px bottom border. The image (max 235px wide, 235:124) and the
+    // status/capacity badges share the top row, everything else spans
+    // the full card width. display: contents lifts the __content
+    // children into the card grid next to __media.
+    .wunderbyte-table-grid,
+    .wunderbyte_table_filter_on .wunderbyte-table-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .wunderbyte-table-grid .booking-card {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-auto-rows: min-content;
+        align-items: start;
+        gap: map-get($spacers, 20);
+        height: auto;
+        padding: 25px map-get($spacers, 20);
+    }
+
+    .wunderbyte-table-grid .booking-card,
+    .wunderbyte-table-grid .booking-card:hover,
+    .wunderbyte-table-grid .list-group-item,
+    .wunderbyte-table-grid .list-group-item:hover,
+    .wunderbyte-table-grid .list-group-item + .list-group-item {
+        border: 0;
+        border-bottom: 2px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+    }
+
+    .wunderbyte-table-grid .booking-card__content {
+        display: contents;
+    }
+
+    .wunderbyte-table-grid .booking-card__media {
+        grid-area: 1 / 1;
+        width: 100%;
+        max-width: 235px;
+        aspect-ratio: 235 / 124;
+    }
+
+    .wunderbyte-table-grid .booking-card__top {
+        grid-area: 1 / 2;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+        min-height: 0;
+    }
+
+    // The design stacks the capacity badge above the status badge.
+    .wunderbyte-table-grid .booking-card__status {
+        order: 2;
+    }
+
+    .wunderbyte-table-grid .booking-card__capacity {
+        order: 1;
+        margin-left: 0;
+
+        .col-ap-availableplaces {
+            height: map-get($spacers, 32);
+        }
+    }
+
+    .wunderbyte-table-grid .booking-card__titlearea,
+    .wunderbyte-table-grid .booking-card__metaarea,
+    .wunderbyte-table-grid .booking-card__tagsarea,
+    .wunderbyte-table-grid .booking-card__actions {
+        grid-column: 1 / -1;
+        min-height: 0;
+    }
+
+    // The mobile tile has no description.
+    .wunderbyte-table-grid .booking-card__descriptionarea {
+        display: none;
+    }
+
+    .wunderbyte-table-grid .booking-card__meta {
+        gap: map-get($spacers, 8);
+    }
+
+    // The frontpage design shows neither the card/list switcher nor
+    // the results count above the tiles.
+    #page-site-index .wbtable-templateswitcher-container,
+    #page-site-index .wb-records-count-label {
+        // The switcher carries an inline display:inline-flex.
+        display: none !important; // stylelint-disable-line declaration-no-important
+    }
+
+    // Categories ("Themen nach Kategorie"): 48px/20px section padding,
+    // 24px below the heading (inline style needs the !important),
+    // 16px category names with the 18px count.
+    .wbtablefilterview .container {
+        padding: map-get($spacers, 48) map-get($spacers, 20);
+    }
+
+    .wbtablefilterview h2 {
+        margin-bottom: map-get($spacers, 24) !important;
+    }
+
+    .wbtablefilterview .category-item {
+        padding: map-get($spacers, 8) 0;
+
+        h4 {
+            font-size: 1rem; // 16px
+            line-height: 1.5rem; // 24px
+            margin: 0;
+        }
+
+        h4.ms-auto {
+            font-size: 1.125rem; // 18px count next to the calendar icon
+        }
+    }
+
+    // Footer: 48px/32px padding (the zero-padding container needs it back).
+    .jku-footer-main .container-fluid {
+        padding: map-get($spacers, 48) map-get($spacers, 32);
     }
 }
 
@@ -1035,4 +1418,534 @@ h1, .h1 {
     height: 18px;
     vertical-align: middle;
     background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18' fill='none'%3E%3Cpath d='M3.91602 5.87439H17.1325' stroke='%234FB0BF' stroke-opacity='.8' stroke-width='1.78' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.44727 12.7267H15.6638' stroke='%234FB0BF' stroke-opacity='.8' stroke-width='1.78' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.32127 2.44763L4.40527 16.1536' stroke='%234FB0BF' stroke-opacity='.8' stroke-width='1.78' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15.1748 2.44763L11.2588 16.1536' stroke='%234FB0BF' stroke-opacity='.8' stroke-width='1.78' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+// -----------------------------------------------------------------
+// Booking option detail page (mod_booking/bookingoption_description_view)
+// per the JKU Figma design: two-column layout with a sticky offer card
+// on desktop; stacked sections (hero, title, offer card, dates, tabs)
+// with a fixed bottom action bar on mobile.
+// -----------------------------------------------------------------
+.jku-detail__inner {
+    max-width: 1488px;
+    margin: 0 auto;
+    padding: 0 map-get($spacers, 20) map-get($spacers, 40);
+
+    @include media-breakpoint-up(lg) {
+        padding: 0 map-get($spacers, 40) map-get($spacers, 4); // 80px bottom
+    }
+}
+
+.jku-detail__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1288px;
+    margin: 0 auto;
+    padding-top: map-get($spacers, 20);
+
+    @include media-breakpoint-up(lg) {
+        padding-top: map-get($spacers, 40);
+    }
+}
+
+.jku-detail__main {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 32);
+    max-width: 1288px;
+    margin: 0 auto;
+    padding-top: map-get($spacers, 20);
+
+    @include media-breakpoint-up(lg) {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: map-get($spacers, 4); // 80px column gap per Figma.
+        padding: map-get($spacers, 40) 0 map-get($spacers, 48);
+    }
+}
+
+.jku-detail__content {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 40);
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.jku-detail__sidebar {
+    width: 100%;
+
+    @include media-breakpoint-up(lg) {
+        flex: 0 0 auto;
+        width: 500px;
+        position: sticky;
+        top: calc(#{$navbar-height} + #{map-get($spacers, 24)});
+    }
+}
+
+// On mobile the content sections and the offer card interleave in the
+// Figma order: hero, title, offer card, dates, tabs, teachers, extras.
+@include media-breakpoint-down(md) {
+    .jku-detail {
+        padding-bottom: 96px; // Room for the fixed action bar.
+    }
+
+    .jku-detail__content {
+        display: contents;
+    }
+
+    .jku-detail__hero { order: 0; }
+    .jku-detail__titleblock { order: 1; }
+    .jku-detail__sidebar { order: 2; }
+    .jku-detail__dates { order: 3; }
+    .jku-detail__tabsblock { order: 4; }
+    .jku-detail__teachers { order: 5; }
+    .jku-detail__additionalinfo { order: 6; }
+    .jku-detail__orgacontacts { order: 7; }
+}
+
+// Full-bleed hero image over the 20px inner padding on mobile.
+.jku-detail__hero {
+    margin: 0 (-(map-get($spacers, 20)));
+
+    img {
+        display: block;
+        width: 100%;
+        height: 207px;
+        object-fit: cover;
+    }
+}
+
+.jku-detail__section {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 16);
+    align-items: flex-start;
+    width: 100%;
+}
+
+.jku-detail__titleblock {
+    gap: map-get($spacers, 20);
+
+    @include media-breakpoint-down(md) {
+        background: #fff;
+        padding: map-get($spacers, 40) map-get($spacers, 24) map-get($spacers, 32);
+    }
+}
+
+.jku-detail__tags {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: map-get($spacers, 20);
+    width: 100%;
+}
+
+// Heading 2/Bold on desktop, Heading 3/Bold on mobile.
+.jku-detail__title {
+    margin: 0;
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    font-family: var(--Font-family-Heading, Montserrat);
+    font-size: 2rem; // 32px
+    font-weight: 700;
+    line-height: 38px;
+
+    @include media-breakpoint-down(md) {
+        font-size: 1.125rem; // 18px
+        line-height: 24px;
+    }
+}
+
+// Small/Regular.
+.jku-detail__shortdesc,
+.jku-detail__text,
+.jku-tabs__content {
+    color: var(--interface-dark_secondary, #242A3A);
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    line-height: var(--Line-height-Small, 24px);
+}
+
+// Heading 3/Bold section headings.
+.jku-detail__heading {
+    margin: 0;
+    color: var(--interface-dark_primary, #0B131F);
+    font-family: var(--Font-family-Heading, Montserrat);
+    font-size: 1.5rem; // 24px
+    font-weight: 700;
+    line-height: 36px;
+}
+
+// "NEU" badge: 32px pill with the success-weak fill.
+.jku-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: map-get($spacers, 32);
+    padding: 0 map-get($spacers, 12);
+    border-radius: map-get($spacers, 16);
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    line-height: var(--Line-height-Small, 24px);
+    white-space: nowrap;
+}
+
+.jku-badge--success {
+    border: 1px solid rgba(91, 167, 85, 0.20);
+    background: rgba(91, 167, 85, 0.05);
+    color: var(--Green-Light-1000, #5BA755);
+}
+
+// Booking status badge: green outlined box, heart icon + booked/max count.
+.jku-capacity {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px; // Figma: 5px between icon and count.
+    height: map-get($spacers, 40);
+    padding: 0 map-get($spacers, 8);
+    border: 2px solid var(--Green-Light-1000, #5BA755);
+    color: var(--Green-Light-1000, #5BA755);
+    white-space: nowrap;
+}
+
+.jku-capacity--full {
+    border-color: $danger;
+    color: $danger;
+}
+
+.jku-capacity__icon {
+    flex: 0 0 auto;
+    display: block;
+}
+
+// Info/Info Bold.
+.jku-capacity__count {
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+// Date cards: white, date bold left, time right, location link below.
+.jku-datecard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: map-get($spacers, 20);
+    background: #fff;
+}
+
+.jku-datecard + .jku-datecard {
+    margin-top: map-get($spacers, 16);
+}
+
+.jku-detail__datelist {
+    width: 100%;
+}
+
+.jku-datecard__datetime {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: map-get($spacers, 16);
+    color: var(--interface-dark_primary, #0B131F);
+
+    .date {
+        font-family: var(--Font-family-Heading, Montserrat);
+        font-size: 1.5rem; // 24px
+        font-weight: 700;
+        line-height: 36px;
+    }
+
+    .time {
+        font-family: var(--Font-family-Heading, Montserrat);
+        font-size: 1.125rem; // 18px
+        line-height: 24px;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    @include media-breakpoint-down(md) {
+        flex-direction: column;
+        gap: map-get($spacers, 8);
+
+        .date {
+            font-size: 1.125rem;
+            line-height: 24px;
+        }
+
+        .time {
+            font-size: 1rem;
+            text-align: left;
+        }
+    }
+}
+
+.jku-datecard__location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    line-height: var(--Line-height-Small, 24px);
+
+    a {
+        color: var(--Primary-Light-1000, #4FB0BF);
+    }
+}
+
+// Tabs: 48px items, 4px bottom border, active in brand color.
+// On mobile the items stack full width with the content below the nav.
+.jku-tabs {
+    width: 100%;
+    border-bottom: 4px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+    background: transparent;
+
+    .nav-item {
+        margin-bottom: -4px;
+    }
+
+    .nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: map-get($spacers, 8);
+        height: 48px;
+        padding: 0 map-get($spacers, 16);
+        border: 0;
+        border-bottom: 4px solid transparent;
+        background: transparent;
+        color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+        font-family: var(--Font-family-Body, Montserrat);
+        font-size: var(--Font-size-Small, 16px);
+        font-weight: 400;
+        line-height: var(--Line-height-Small, 24px);
+
+        i {
+            color: inherit;
+        }
+    }
+
+    .nav-link.active {
+        background: transparent;
+        border-bottom: 4px solid var(--Primary-Light-1000, #4FB0BF);
+        color: var(--Primary-Light-1000, #4FB0BF);
+        font-weight: 700;
+    }
+
+    @include media-breakpoint-down(md) {
+        flex-direction: column;
+        border-bottom: 0;
+
+        .nav-item {
+            margin-bottom: 0;
+            width: 100%;
+        }
+
+        .nav-link {
+            width: 100%;
+            justify-content: flex-start;
+            border-bottom: 4px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+        }
+    }
+}
+
+.jku-tabs__content {
+    width: 100%;
+    padding-top: map-get($spacers, 24);
+}
+
+// Teacher section: round avatar, name, description, profile link.
+.jku-teacher {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    width: 100%;
+}
+
+.jku-teacher__avatar {
+    flex: 0 0 103px;
+    width: 103px;
+    height: 103px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
+
+.jku-teacher__avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--Fill-Weak, rgba(0, 0, 0, 0.04));
+    color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+    font-size: 2.5rem;
+}
+
+.jku-teacher__info {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 16);
+    min-width: 0;
+}
+
+.jku-teacher__name {
+    margin: 0;
+    color: var(--interface-dark_primary, #0B131F);
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    font-weight: 700;
+    line-height: var(--Line-height-Small, 24px);
+}
+
+.jku-teacher__description {
+    color: var(--interface-dark_primary, #0B131F);
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    line-height: var(--Line-height-Small, 24px);
+}
+
+.jku-teacher__profilelink {
+    align-self: flex-start;
+    font-size: var(--Font-size-Tiny, 14px);
+    font-weight: 700;
+}
+
+// Organization contacts.
+.jku-detail__orgacontactlist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: map-get($spacers, 24);
+}
+
+.jku-detail__orgacontact p {
+    margin: 0;
+}
+
+.jku-detail__orgacontact-name {
+    font-weight: 700;
+}
+
+// Sticky offer card ("Über das Angebot").
+.jku-offer-card {
+    background: #fff;
+    border: 2px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+}
+
+.jku-offer-card__media {
+    aspect-ratio: 363 / 193;
+    overflow: hidden;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .booking-card__image-placeholder {
+        height: 100%;
+    }
+}
+
+.jku-offer-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    padding: map-get($spacers, 24);
+}
+
+.jku-offer-card__tags {
+    justify-content: space-between;
+}
+
+// Heading 4/Bold.
+.jku-offer-card__heading {
+    margin: 0;
+    color: var(--interface-dark_primary, #0B131F);
+    font-family: var(--Font-family-Heading, Montserrat);
+    font-size: var(--Font-size-Heading-4, 18px);
+    font-weight: 700;
+    line-height: var(--Line-height-Heading-4, 24px);
+}
+
+.jku-offer-card__meta {
+    gap: map-get($spacers, 16);
+}
+
+.jku-offer-card__categories {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+// Tiny/Regular, weak.
+.jku-offer-card__info {
+    color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Tiny, 14px);
+    line-height: var(--Line-height-Tiny, 20px);
+}
+
+.jku-offer-card__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+// Similar events below the two columns.
+.jku-detail__similar {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 24);
+    padding-top: map-get($spacers, 40);
+}
+
+// Mobile action bar, fixed at the bottom.
+.jku-detail__mobilebar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $zindex-fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: map-get($spacers, 20);
+    background: #fff;
+    box-shadow: 0 -5px 2.25px rgba(15, 35, 73, 0.08);
+}
+
+.jku-detail__mobilebar.d-lg-none {
+    display: flex !important;
+
+    @include media-breakpoint-up(lg) {
+        display: none !important;
+    }
+}
+
+.jku-detail__mobilebar-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 46px;
+    padding: 0;
+}
+
+.jku-detail__mobilebar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 1 auto;
 }
