@@ -425,19 +425,6 @@ a {
     gap: map-get($spacers, 12) map-get($spacers, 15);
 }
 
-// The jku table templates wrap the filter in a mobile collapse
-// (#collapseMobileFilter). From md up the filter is always open and the
-// toggle button disappears; below md the button controls the collapse.
-@include media-breakpoint-up(md) {
-    .filtermobile {
-        display: none;
-    }
-
-    .showfilterdesktop {
-        display: block !important; // beat the .collapse display: none. stylelint-disable-line declaration-no-important
-    }
-}
-
 .wunderbyte_table_components  {
   background-color: transparent;
 }
