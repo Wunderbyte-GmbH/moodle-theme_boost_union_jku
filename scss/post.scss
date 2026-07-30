@@ -1421,6 +1421,107 @@ h1, .h1 {
 }
 
 // -----------------------------------------------------------------
+// Course listing (angebot.php et al.): sort dropdown and view switcher
+// above the tiles, restyled per the JKU Figma design as 32px buttons
+// with a 2px stroke, square corners and the "Raised" shadow. The
+// markup stays local_wunderbyte_table's; only the chrome changes.
+// -----------------------------------------------------------------
+.jku-courses-container .filtermobilewrap {
+    align-items: center;
+    gap: map-get($spacers, 16);
+
+    // The design puts the sort button first, the view switcher second.
+    .wunderbyteTableSelect {
+        order: 1;
+        margin-right: 0 !important; // me-3 becomes the flex gap above.
+    }
+
+    .wbtable-templateswitcher-container {
+        order: 2;
+        margin-right: 0 !important;
+    }
+
+    .wunderbyteTableSelect,
+    .wbtable-templateswitcher-container {
+        display: inline-flex !important; // The switcher carries an inline style.
+        align-items: center;
+        height: 32px;
+        background-color: $white;
+        border: 2px solid rgba(0, 0, 0, 0.9);
+        border-radius: 0;
+        // Figma "Shadow/Raised".
+        box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+    }
+
+    // Sort: [up/down arrows icon] "Sortieren nach: ..." in Tiny/Bold.
+    .wunderbyteTableSelect {
+        padding: 0 map-get($spacers, 12);
+
+        .changesortorder {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .wunderbyteTableSortIcon {
+            width: 16px;
+            height: 16px;
+
+            &::before {
+                content: "";
+                display: block;
+                width: 16px;
+                height: 16px;
+                background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6.08334 3.12037L3.41667 0.75L0.750008 3.12037M3.41667 0.75V10.0833M6.08334 7.71296L3.41667 10.0833L0.750008 7.71296' transform='translate(4.583 2.583)' stroke='black' stroke-opacity='.9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            }
+        }
+
+        .sortcolumn {
+            appearance: none;
+            width: auto;
+            height: auto;
+            padding: 0 4px;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            font-family: inherit;
+            font-size: 0.875rem; // 14px
+            font-weight: $font-weight-bold;
+            line-height: 1.25rem; // 20px
+            color: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+        }
+    }
+
+    // View switcher: a 32px square button showing only the grid icon;
+    // the native dropdown (List/Cards) still opens on click.
+    .wbtable-templateswitcher-container {
+        justify-content: center;
+
+        > i {
+            display: none; // The design has no separate icon next to the control.
+        }
+
+        .wbtable-templateswitcher-select {
+            appearance: none;
+            width: 28px !important; // Inline width: fit-content; 28 + 2 * 2px border = 32px.
+            height: 28px;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            color: transparent; // Hide the selected label; the icon is the button face.
+            background: $white center no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cg transform='translate(1.25 1.25)'%3E%3Cpath d='M5.41667 0.75H0.75V5.41667H5.41667V0.75Z' stroke='black' stroke-opacity='.9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12.75 0.75H8.08333V5.41667H12.75V0.75Z' stroke='black' stroke-opacity='.9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12.75 8.08333H8.08333V12.75H12.75V8.08333Z' stroke='black' stroke-opacity='.9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5.41667 8.08333H0.75V12.75H5.41667V8.08333Z' stroke='black' stroke-opacity='.9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 16px 16px;
+            cursor: pointer;
+
+            option {
+                color: rgba(0, 0, 0, 0.9);
+                font-size: 0.875rem;
+            }
+        }
+    }
+}
+
+// -----------------------------------------------------------------
 // Booking option detail page (mod_booking/bookingoption_description_view)
 // per the JKU Figma design: two-column layout with a sticky offer card
 // on desktop; stacked sections (hero, title, offer card, dates, tabs)
@@ -1963,6 +2064,13 @@ h1, .h1 {
     #page.drawers {
         padding-left: 0;
         padding-right: 0;
+
+        // Boost adds 15px side padding to the main content wrapper on >=md
+        // screens; the header band has to reach the page edges.
+        div[role="main"] {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
 
     #topofscroll,
