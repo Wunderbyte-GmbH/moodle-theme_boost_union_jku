@@ -171,6 +171,12 @@ a {
   height: 48px;
 }
 
+// The plugin's .wb_news_hero .wb_news_hero_box rule sets a 92%-white
+// background; the design wants the card fully opaque.
+.wb_news_hero .wb_news_hero_box {
+    background-color: var(--Background-Raised, #fff);
+}
+
 .wb_news_hero_box h1 {
     margin: 0 0 24px;
     color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
