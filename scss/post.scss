@@ -91,16 +91,43 @@ a {
   border-radius: 0 !important;
 }
 
-#page-mod-booking-optionview #page {
-  padding: 0px;
-}
+// Booking option detail page: the moodle navbar stays, the page header and
+// secondary navigation are removed and the tinted content area starts
+// directly below the navbar without any paddings or margins in between
+// (same approach as the local/jku dashboard pages further down).
+#page-mod-booking-optionview {
+  #page-header,
+  .secondary-navigation {
+    display: none;
+  }
 
-#page-mod-booking-optionview .main-inner-wrapper {
-  background: rgba(79, 176, 191, 0.05);
-}
-#page-mod-booking-optionview 
-#region-main, #page-mod-booking-optionview #topofscroll {
-  background: transparent;
+  #page {
+    padding: 0;
+  }
+
+  #page.drawers div[role="main"] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #topofscroll,
+  #page-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none;
+  }
+
+  .main-inner-wrapper {
+    padding: 0;
+    margin: 0;
+    background: rgba(79, 176, 191, 0.05);
+  }
+
+  #topofscroll,
+  #region-main {
+    background: transparent;
+    border: none;
+  }
 }
 
 .mod-booking-view-card-image {
@@ -1562,7 +1589,7 @@ h1, .h1 {
         flex-direction: row;
         align-items: flex-start;
         gap: map-get($spacers, 4); // 80px column gap per Figma.
-        padding: map-get($spacers, 40) 0 map-get($spacers, 48);
+        padding: map-get($spacers, 40) 0 56px; // Figma: pb-56 below the two columns.
     }
 }
 
@@ -1624,6 +1651,10 @@ h1, .h1 {
     gap: map-get($spacers, 16);
     align-items: flex-start;
     width: 100%;
+}
+
+.jku-detail__tabsblock {
+    gap: map-get($spacers, 24); // Figma: 24px between the tab nav and its content.
 }
 
 .jku-detail__titleblock {
@@ -2101,5 +2132,179 @@ h1, .h1 {
 
     .main-inner-wrapper {
         background: transparent;
+    }
+}
+
+// -----------------------------------------------------------------
+// Navigation header right side (Figma node 11229:102372): always
+// visible search field, notification bell with a red badge dot,
+// user menu with avatar + name + chevron and a compact language
+// picker ("DE") as the last element. The element order and the
+// removal of the dividers happen in the theme's navbar.mustache,
+// search_input_navbar.mustache, user_menu_metadata.mustache and
+// language_menu.mustache overrides.
+// -----------------------------------------------------------------
+#usernavigation {
+    align-items: center;
+    gap: map-get($spacers, 16);
+
+    @include media-breakpoint-up(md) {
+        padding-right: map-get($spacers, 32);
+    }
+
+    // The explicit chevron icons replace the Bootstrap caret.
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    // Search: 200px x 32px field, magnifier icon (= submit button) and
+    // placeholder inside, 12px inner side padding, 4px gap.
+    .simplesearchform {
+        .searchform-navbar {
+            width: 200px;
+            height: 32px;
+            background: #fff;
+            border: 1px solid var(--Stroke-Strong, rgba(0, 0, 0, 0.45));
+        }
+
+        .input-group {
+            height: 100%;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
+        .btn-submit,
+        .btn-submit:hover,
+        .btn-submit:focus {
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            padding: 0 0 0 map-get($spacers, 12);
+            color: var(--Text-Weak, rgba(0, 0, 0, 0.6));
+
+            .icon {
+                font-size: 16px;
+                width: 16px;
+                height: 16px;
+                margin: 0;
+            }
+        }
+
+        .form-control {
+            // Sized by its own 20px line box and flex-centered by the
+            // input group; an explicit height renders the text off-center.
+            height: auto;
+            background: transparent;
+            border: 0;
+            padding: 0 map-get($spacers, 12) 0 4px;
+            font-size: $font-size-tiny;
+            line-height: $line-height-tiny;
+            color: var(--Text-Strong, rgba(0, 0, 0, 0.9));
+
+            &::placeholder {
+                color: var(--Text-Weak, rgba(0, 0, 0, 0.6));
+            }
+
+            // The field itself indicates focus (see :focus-within below),
+            // the inner focus ring would show inside the bordered box.
+            &:focus {
+                box-shadow: none;
+                outline: 0;
+            }
+        }
+
+        .searchform-navbar:focus-within {
+            border-color: var(--Grey-slate-solid-1000, #000);
+        }
+    }
+
+    // Notification bell: 48px hit area with a centered 24px outline
+    // (Font Awesome regular weight) bell.
+    .popover-region {
+        .popover-region-toggle.nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+
+            .icon {
+                font-size: 24px;
+                width: 24px;
+                height: 24px;
+                margin: 0;
+                font-weight: 400;
+                color: var(--Text-Weak, rgba(0, 0, 0, 0.6));
+            }
+        }
+
+        // Unread badge: plain 8px red dot with a white ring in the top
+        // right corner of the hit area instead of the counter bubble.
+        .count-container {
+            top: map-get($spacers, 8);
+            right: map-get($spacers, 8);
+            left: auto;
+            width: 8px;
+            height: 8px;
+            padding: 0;
+            border-radius: 50%;
+            background-color: var(--Red-Light-1000, #D95C4C);
+            box-shadow: 0 0 0 2px #fff;
+            font-size: 0;
+            overflow: hidden;
+        }
+    }
+
+    // The user menu and language picker toggles are plain elements in the
+    // design, without the theme's global .btn drop shadow.
+    .usermenu .dropdown-toggle,
+    .langmenu .dropdown-toggle {
+        box-shadow: none;
+        text-decoration: none;
+    }
+
+    // User menu: avatar (32px, round) + name + chevron.
+    .usermenu .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        gap: map-get($spacers, 8);
+        padding: map-get($spacers, 8) map-get($spacers, 16);
+
+        .avatars .avatar img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.1));
+        }
+
+        .usermenu-name {
+            font-size: $font-size-tiny;
+            line-height: $line-height-tiny;
+            color: var(--Text-Strong, rgba(0, 0, 0, 0.9));
+        }
+
+        .usermenu-chevron {
+            font-size: 16px;
+            margin: 0;
+            color: var(--Text-Weak, rgba(0, 0, 0, 0.6));
+        }
+    }
+
+    // Language picker: uppercase language code + chevron.
+    .langmenu .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        gap: map-get($spacers, 8);
+        padding: 0;
+        font-size: $font-size-base;
+        line-height: $font-size-base * $line-height-base;
+        color: var(--Grey-slate-solid-1000, #000);
+
+        .langmenu-chevron {
+            font-size: 15px;
+            margin: 0;
+            color: var(--Grey-slate-solid-1000, #000);
+        }
     }
 }
