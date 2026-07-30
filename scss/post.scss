@@ -173,6 +173,15 @@ a {
 
 .wb_news_hero_box h1 {
     margin: 0 0 24px;
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    font-feature-settings: 'liga' off, 'clig' off;
+    // Heading 1/Bold per Figma
+    font-family: var(--Font-family-Heading, Montserrat);
+    font-size: var(--Font-size-Heading-1, 48px);
+    font-style: normal;
+    font-weight: 700;
+    line-height: var(--Line-height-Heading-1, 64px); // 133.333%
+    letter-spacing: -0.5px;
 }
 
 // Login page side image. Defined here (not in the template's inline <style>)
@@ -208,6 +217,91 @@ a {
 #theme-block-region-outside-top .card.wb_news_hero_box
 .card-body {
   padding:  64px !important;
+}
+
+// A single infoslide sits in its col-md-* and would hug the left edge;
+// center the lone card in the row and cap it at the Figma card width.
+.wb_news .row.card-deck > [class*="col-"]:only-child:has(.wb_news_card_infoslides) {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 736px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+// Lone infoslide per Figma "Einführung & FAQ" card (11229:102097):
+// horizontal white card, 240x264 illustration left, left-aligned text
+// and the outline button on the right. Below md the plugin's stacked
+// centered card remains in place.
+@include media-breakpoint-up(md) {
+    .wb_news .row.card-deck > [class*="col-"]:only-child .card.wb_news_card_infoslides {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        // The flexible edge rows split the leftover height of the taller
+        // image column evenly, so the text/button block sits vertically
+        // centered next to the illustration.
+        grid-template-rows: 1fr auto auto 1fr;
+        text-align: left;
+        // The template inlines bgcolor and border: none.
+        background-color: var(--Background-Raised, #fff) !important; // stylelint-disable-line declaration-no-important
+
+        .infoslideimg {
+            grid-row: 1 / -1;
+            width: 240px;
+        }
+
+        .card-body {
+            grid-row: 2;
+            grid-column: 2;
+            padding: map-get($spacers, 32) map-get($spacers, 32) 0;
+            margin-top: 0 !important; // stylelint-disable-line declaration-no-important
+        }
+
+        .card-title {
+            margin: 0 0 map-get($spacers, 8);
+            color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+            // Heading 3/Bold per Figma
+            font-size: var(--Font-size-Heading-3, 24px);
+            font-weight: 700;
+            line-height: var(--Line-height-Heading-3, 36px);
+        }
+
+        .card-subtitle {
+            margin: 0;
+            color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+            font-size: var(--Font-size-Small, 16px);
+            font-weight: 400;
+            line-height: var(--Line-height-Small, 24px);
+        }
+
+        .card-footer {
+            grid-row: 3;
+            grid-column: 2;
+            padding: map-get($spacers, 24) map-get($spacers, 32) map-get($spacers, 32);
+            background: none;
+            border: 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            height: map-get($spacers, 48);
+            padding: 0 map-get($spacers, 20);
+            border-width: 2px;
+            border-color: var(--Stroke-Brand-strong, rgba(79, 176, 191, 0.80));
+            font-size: var(--Font-size-Small, 16px);
+            font-weight: 700;
+            line-height: var(--Line-height-Small, 24px);
+        }
+    }
+}
+
+// The base "#theme-block-region-outside-top .block .card-body
+// { padding: 0 !important }" above outguns the nested infoslide rules
+// at any width, so the 32px content padding needs the region ids too.
+#theme-block-region-outside-top .wb_news .card.infoslide .card-body,
+#theme-block-region-outside-bottom .wb_news .card.infoslide .card-body {
+    padding: map-get($spacers, 32) map-get($spacers, 32) 0 !important; // stylelint-disable-line declaration-no-important
 }
 
 .wunderbyte-table-grid .list-group-item {
@@ -323,6 +417,19 @@ a {
 .jku-filter-bg .wunderbyteTableFilter.row {
     justify-content: center;
     gap: map-get($spacers, 12) map-get($spacers, 15);
+}
+
+// The jku table templates wrap the filter in a mobile collapse
+// (#collapseMobileFilter). From md up the filter is always open and the
+// toggle button disappears; below md the button controls the collapse.
+@include media-breakpoint-up(md) {
+    .filtermobile {
+        display: none;
+    }
+
+    .showfilterdesktop {
+        display: block !important; // beat the .collapse display: none. stylelint-disable-line declaration-no-important
+    }
 }
 
 .wunderbyte_table_components  {
@@ -1187,6 +1294,16 @@ h1, .h1 {
 // -----------------------------------------------------------------
 @include media-breakpoint-down(md) {
 
+    // The design sections are full-bleed on mobile and bring their own
+    // 20px side insets; Boost Union adds 15px side padding to the outside
+    // regions below md (needs !important to beat the #id.class selector).
+    #theme-block-region-outside-top,
+    #theme-block-region-outside-bottom,
+    #theme-block-region-footer {
+        padding-left: 0 !important; // stylelint-disable-line declaration-no-important
+        padding-right: 0 !important; // stylelint-disable-line declaration-no-important
+    }
+
     // Navigation header: the Boost navbar hides the brand logo on
     // mobile (d-none d-md-flex) but the design shows burger + logo.
     .navbar .navbar-brand {
@@ -1198,8 +1315,9 @@ h1, .h1 {
         padding-left: 0;
     }
 
+    // Figma (11756:38755): 32px side padding on the 72px header.
     .navbar > .container-fluid {
-        padding: 0 map-get($spacers, 20);
+        padding: 0 map-get($spacers, 32);
     }
 
     // Headings: hero title uses Heading 2 (32/38), section titles
@@ -1239,14 +1357,35 @@ h1, .h1 {
         transform: none;
         width: calc(100% - 40px);
         margin: -67px auto 0;
+        // The plugin's rgba(255, 255, 255, .92) lets the image bleed through
+        // the overlapping card; the design wants it opaque, borderless and
+        // without the plugin's drop shadow.
+        background-color: #fff;
+        border: 0;
+        box-shadow: none;
+    }
+
+    // If the card grows taller than the image overlap, the area it extends
+    // into stays white as well.
+    .wb_news_hero .wb_news_hero_item {
+        background-color: #fff;
     }
 
     #theme-block-region-outside-top .card.wb_news_hero_box .card-body {
         padding: map-get($spacers, 40) !important;
     }
 
+    // Heading 2/Bold per Figma — the base rule above keeps Heading 1 (48/64)
+    // and out-specifies the generic mobile h1 rule, so restate it here.
     .wb_news_hero_box h1 {
         margin: 0 0 map-get($spacers, 24);
+        color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: var(--Font-family-Heading, Montserrat);
+        font-size: var(--Font-size-Heading-2, 32px);
+        font-style: normal;
+        font-weight: 700;
+        line-height: var(--Line-height-Heading-2, 38px);
     }
 
     // Hero buttons: full width, 48px high, stacked with a 16px gap.
@@ -1259,7 +1398,10 @@ h1, .h1 {
     }
 
     .wb_news_hero_box .btn + .btn {
-        margin-top: map-get($spacers, 16);
+        // The base styles force margin-top: 0 !important and add the
+        // desktop 8px side gap; both must be undone for the stacked layout.
+        margin-top: map-get($spacers, 16) !important; // stylelint-disable-line declaration-no-important
+        margin-left: 0;
     }
 
     // Infoslides ("Veranstaltungen" cards): one card per view in a
@@ -1286,12 +1428,56 @@ h1, .h1 {
         }
     }
 
-    // Figma: 213x198 slide image (the template inlines height: 264px).
-    .wb_news .card.infoslide .infoslideimg {
-        height: 198px !important;
+    // Infoslide card per Figma (11756:38757), but borderless: the
+    // 213x198 image on top (the template inlines height: 264px), 32px
+    // content padding, centered Heading 3 title over the weak secondary
+    // text, and the 48px outlined brand button.
+    .wb_news .card.infoslide {
+        .infoslideimg {
+            height: 198px !important; // stylelint-disable-line declaration-no-important
 
-        .wb_news-headerimage {
-            max-height: 198px !important;
+            .wb_news-headerimage {
+                max-height: 198px !important; // stylelint-disable-line declaration-no-important
+            }
+        }
+
+        .card-body {
+            margin-top: 0 !important; // undo the template's mt-32. stylelint-disable-line declaration-no-important
+        }
+
+        .card-title {
+            margin: 0 0 map-get($spacers, 8);
+            color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+            // Heading 3/Bold per Figma
+            font-size: var(--Font-size-Heading-3, 24px);
+            font-weight: 700;
+            line-height: var(--Line-height-Heading-3, 36px);
+        }
+
+        .card-subtitle {
+            margin: 0;
+            color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+            font-size: var(--Font-size-Small, 16px);
+            font-weight: 400;
+            line-height: var(--Line-height-Small, 24px);
+        }
+
+        .card-footer {
+            padding: map-get($spacers, 24) map-get($spacers, 32) map-get($spacers, 32);
+            background: none;
+            border: 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            height: map-get($spacers, 48);
+            padding: 0 map-get($spacers, 20);
+            border-width: 2px;
+            border-color: var(--Stroke-Brand-strong, rgba(79, 176, 191, 0.80));
+            font-size: var(--Font-size-Small, 16px);
+            font-weight: 700;
+            line-height: var(--Line-height-Small, 24px);
         }
     }
 
@@ -1312,7 +1498,8 @@ h1, .h1 {
         align-items: start;
         gap: map-get($spacers, 20);
         height: auto;
-        padding: 25px map-get($spacers, 20);
+        // The row template puts a .p-0 utility on the card.
+        padding: 25px map-get($spacers, 20) !important; // stylelint-disable-line declaration-no-important
     }
 
     .wunderbyte-table-grid .booking-card,
@@ -1410,6 +1597,34 @@ h1, .h1 {
     // Footer: 48px/32px padding (the zero-padding container needs it back).
     .jku-footer-main .container-fluid {
         padding: map-get($spacers, 48) map-get($spacers, 32);
+    }
+
+    .jku-footer-main .my-48 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    // Footer order per Figma (11756:38782): logo, social icons, copyright.
+    // On desktop logo and copyright share the left column; on mobile the
+    // wrapper dissolves so the three parts can be reordered in the column.
+    .jku-footer-main .jku-footer-brand {
+        display: contents;
+    }
+
+    .jku-footer-main .jku-footer-logo-link {
+        order: 1;
+        // The logo link carries an mb-16 utility (desktop spacing).
+        margin-bottom: map-get($spacers, 24) !important; // stylelint-disable-line declaration-no-important
+    }
+
+    .jku-footer-main nav {
+        order: 2;
+        margin-bottom: map-get($spacers, 32);
+        padding-top: 0;
+    }
+
+    .jku-footer-main .jku-footer-copyright {
+        order: 3;
     }
 }
 
@@ -2306,5 +2521,331 @@ h1, .h1 {
             margin: 0;
             color: var(--Grey-slate-solid-1000, #000);
         }
+    }
+}
+
+// -----------------------------------------------------------------
+// Teacher pages (mod/booking/teachers.php and teacher.php). There is
+// no exact Figma page; the layout follows the design language: the
+// teal hero band with the centered white title (as on "Mein Bereich",
+// node 11454-10240) over a card grid for the overview, and the detail
+// page structure (topbar back link, white cards on the tinted
+// background, trainer avatar block) for the single teacher.
+// -----------------------------------------------------------------
+.page-mod-booking-allteachers,
+.page-mod-booking-teacher {
+    #page-header,
+    .secondary-navigation {
+        display: none;
+    }
+
+    #page.drawers div[role="main"] {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #topofscroll,
+    #page-content {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: none;
+    }
+
+    .main-inner-wrapper {
+        padding: 0;
+        margin: 0;
+        background: rgba(79, 176, 191, 0.05);
+    }
+
+    #topofscroll,
+    #region-main {
+        background: transparent;
+        border: none;
+    }
+}
+
+// teacher.php echoes its own ">> Show all teachers" heading link above the
+// template output; the redesigned topbar carries the back link instead.
+.page-mod-booking-teacher div[role="main"] > a > h5 {
+    display: none;
+}
+
+// The admin-only warning alert teachers.php echoes before the template
+// would otherwise stick to the page edges above the hero band.
+.page-mod-booking-allteachers div[role="main"] > .alert {
+    max-width: 1288px;
+    margin: map-get($spacers, 20) auto 0;
+}
+
+// Teal hero band with the centered white page title.
+.jku-teachers__hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: map-get($spacers, 47) map-get($spacers, 20);
+    background: var(--Primary-Light-1000, #4FB0BF);
+
+    h1 {
+        margin: 0;
+        color: #fff;
+        font-family: var(--Font-family-Heading, Montserrat);
+        font-size: var(--Font-size-Heading-2, 32px);
+        font-weight: 700;
+        line-height: var(--Line-height-Heading-2, 38px);
+        text-align: center;
+    }
+}
+
+.jku-teachers__inner {
+    max-width: 1288px;
+    margin: 0 auto;
+    padding: map-get($spacers, 40) map-get($spacers, 20) map-get($spacers, 4);
+}
+
+// Admin mailing list helper above the grid.
+.jku-teachers__admin {
+    margin-bottom: map-get($spacers, 24);
+
+    .jku-teachers__mailinglist-toggle {
+        font-size: var(--Font-size-Tiny, 14px);
+        font-weight: 700;
+    }
+
+    .jku-teachers__mailinglist {
+        margin-top: map-get($spacers, 12);
+        padding: map-get($spacers, 16);
+        background: #fff;
+        border: 2px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+        font-size: var(--Font-size-Tiny, 14px);
+        line-height: var(--Line-height-Tiny, 20px);
+        word-break: break-all;
+    }
+}
+
+// Card grid, same rhythm as the wunderbyte table card grid (350px, 20px gap).
+.jku-teachers__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: map-get($spacers, 20);
+
+    @include media-breakpoint-down(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.jku-teacher-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 2px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+}
+
+.jku-teacher-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 16);
+    flex: 1 1 auto;
+    padding: map-get($spacers, 24);
+}
+
+.jku-teacher-card__head {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacers, 16);
+
+    // Smaller round avatar inside the cards than on the detail page.
+    .jku-teacher__avatar {
+        flex: 0 0 64px;
+        width: 64px;
+        height: 64px;
+
+        .jku-teacher__avatar-placeholder {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+// Heading 4/Bold, the whole name links to the teacher page.
+.jku-teacher-card__name {
+    margin: 0;
+    min-width: 0;
+    font-family: var(--Font-family-Heading, Montserrat);
+    font-size: var(--Font-size-Heading-4, 18px);
+    font-weight: 700;
+    line-height: var(--Line-height-Heading-4, 24px);
+
+    a {
+        color: var(--interface-dark_primary, #0B131F);
+
+        &:hover {
+            color: var(--Primary-Light-1000, #4FB0BF);
+            text-decoration: none;
+        }
+    }
+}
+
+.jku-teacher-card__edit {
+    margin-left: auto;
+    align-self: flex-start;
+    color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+    cursor: pointer;
+}
+
+// Small/Regular, clamped so all cards keep a similar height.
+.jku-teacher-card__description {
+    color: var(--interface-dark_secondary, #242A3A);
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    line-height: var(--Line-height-Small, 24px);
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.jku-teacher-card__morelink {
+    font-size: var(--Font-size-Tiny, 14px);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.jku-teacher-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 map-get($spacers, 24) map-get($spacers, 24);
+}
+
+.jku-teacher-card__actions {
+    display: flex;
+    gap: map-get($spacers, 8);
+}
+
+// Square outlined icon buttons (mail, message, hours).
+.jku-teacher-card__iconbtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    i {
+        margin: 0;
+    }
+}
+
+// Single teacher page.
+.jku-teacherpage__main {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 40);
+    max-width: 1288px;
+    margin: 0 auto;
+    padding: map-get($spacers, 20) 0 map-get($spacers, 4);
+
+    @include media-breakpoint-up(lg) {
+        padding-top: map-get($spacers, 40);
+    }
+}
+
+// Profile header: white card with the 103px round avatar, name and contacts.
+.jku-teacherpage__header {
+    display: flex;
+    align-items: flex-start;
+    gap: map-get($spacers, 32);
+    padding: map-get($spacers, 32);
+    background: #fff;
+    border: 2px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: map-get($spacers, 24) map-get($spacers, 20);
+    }
+}
+
+.jku-teacherpage__headerinfo {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 16);
+    min-width: 0;
+
+    @include media-breakpoint-down(sm) {
+        align-items: center;
+    }
+}
+
+// Heading 2/Bold on desktop, Heading 3/Bold on mobile.
+.jku-teacherpage__name {
+    margin: 0;
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    font-family: var(--Font-family-Heading, Montserrat);
+    font-size: var(--Font-size-Heading-2, 32px);
+    font-weight: 700;
+    line-height: var(--Line-height-Heading-2, 38px);
+
+    @include media-breakpoint-down(md) {
+        font-size: 1.5rem;
+        line-height: 36px;
+    }
+}
+
+.jku-teacherpage__edit {
+    margin-left: map-get($spacers, 8);
+    color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+    font-size: 1rem;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.jku-teacherpage__meta {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 8);
+    align-items: flex-start;
+
+    @include media-breakpoint-down(sm) {
+        align-items: center;
+    }
+}
+
+// Icon + value rows like the offer card meta items.
+.jku-teacherpage__metaitem {
+    display: inline-flex;
+    align-items: center;
+    gap: map-get($spacers, 8);
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    line-height: var(--Line-height-Small, 24px);
+
+    i {
+        color: var(--Primary-Light-1000, #4FB0BF);
+    }
+
+    &:hover {
+        color: var(--Primary-Light-1000, #4FB0BF);
+        text-decoration: none;
+    }
+}
+
+.jku-teacherpage__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: map-get($spacers, 12);
+}
+
+.jku-teacherpage__description {
+    width: 100%;
+    padding: map-get($spacers, 24);
+    background: #fff;
+    border: 2px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+
+    > :last-child {
+        margin-bottom: 0;
     }
 }

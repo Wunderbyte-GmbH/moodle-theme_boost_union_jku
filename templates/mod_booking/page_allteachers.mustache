@@ -1,0 +1,144 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_booking/page_allteachers
+
+    Theme override for the JKU design: teal hero band with the centered
+    page title and a grid of white teacher cards (avatar, name, short
+    description, profile/mail/message actions).
+
+    Example context (json):
+    {
+        "canedit" : true,
+        "teachers" : [
+            {
+                "teacherid" : "1005",
+                "firstname" : "Billy",
+                "lastname" : "Teachy",
+                "description" : "description text",
+                "linktoperformedunitsreport" :  "http://site/mod/booking/teacher_performed_units_report.php?teacherid=1005",
+                "email" : "billy.teachy@mailnotexisting.net",
+                "messagingispossible" : true,
+                "link" : "http://site/mod/booking/teacher.php?teacherid=1005",
+                "messagelink" : "http://site/message/index.php?id=1005"
+            }
+        ]
+    }
+}}
+<div class="jku-teachers">
+    <div class="jku-teachers__hero">
+        <h1>{{#str}} allteachers, mod_booking {{/str}}</h1>
+    </div>
+    <div class="jku-teachers__inner">
+        {{#canedit}}
+        <div class="jku-teachers__admin">
+            <a class="jku-teachers__mailinglist-toggle" data-toggle="collapse" data-bs-toggle="collapse" href="#collapsiblelistofteachers" role="button" aria-expanded="false" aria-controls="collapsiblelistofteachers">
+                <i class="fa fa-envelope mr-2" aria-hidden="true"></i>{{#str}} showteachersmailinglist, mod_booking {{/str}}
+            </a>
+            <div class="collapse jku-teachers__mailinglist page-allteachers-teachersmailinglist" id="collapsiblelistofteachers">
+                {{#teachers}}
+                    "{{lastname}} {{firstname}}" &lt;{{email}}&gt;;<br>
+                {{/teachers}}
+            </div>
+        </div>
+        {{/canedit}}
+        <div class="jku-teachers__grid">
+            {{#teachers}}
+            <div class="jku-teacher-card page-allteachers-card">
+                <div class="jku-teacher-card__body">
+                    <div class="jku-teacher-card__head">
+                        <div class="jku-teacher__avatar">
+                            {{#image}}<a href="{{link}}"><img src="{{image}}" alt="{{firstname}} {{lastname}}"></a>{{/image}}
+                            {{^image}}<a href="{{link}}" class="jku-teacher__avatar-placeholder" aria-label="{{firstname}} {{lastname}}"><i class="fas fa-user" aria-hidden="true"></i></a>{{/image}}
+                        </div>
+                        <h2 class="jku-teacher-card__name page-allteachers-teachername"><a href="{{link}}">{{firstname}} {{lastname}}</a></h2>
+                        {{#profileediturl}}
+                        <a class="jku-teacher-card__edit edit-teacher-description" data-teacherid="{{teacherid}}" role="button" aria-label="{{#str}} edit, core {{/str}}" title="{{#str}} edit, core {{/str}}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        {{/profileediturl}}
+                    </div>
+                    {{#description}}
+                    <div class="jku-teacher-card__description">{{{description}}}</div>
+                    {{/description}}
+                    {{#descriptionlong}}
+                    <div>
+                        <a class="jku-teacher-card__morelink" role="button"
+                            data-toggle="modal" data-target="#descriptionlong-modal-{{teacherid}}"
+                            data-bs-toggle="modal" data-bs-target="#descriptionlong-modal-{{teacherid}}">
+                            {{#str}} more, core {{/str}}
+                        </a>
+                        <div class="modal fade" id="descriptionlong-modal-{{teacherid}}" tabindex="-1" role="dialog" aria-labelledby="descriptionlong-modal-title-{{teacherid}}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="descriptionlong-modal-title-{{teacherid}}">{{firstname}} {{lastname}}</h5>
+                                        <button type="button" class="btn-close close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="{{#str}} close, mod_booking {{/str}}">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{{.}}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">
+                                            {{#str}} close, mod_booking {{/str}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/descriptionlong}}
+                </div>
+                <div class="jku-teacher-card__footer">
+                    <a href="{{link}}" class="btn btn-secondary jku-teacher-card__profilelink">{{#str}} gotoprofile, theme_boost_union_jku {{/str}}</a>
+                    <div class="jku-teacher-card__actions">
+                        {{#email}}
+                        <a href="mailto:{{email}}" class="btn btn-secondary jku-teacher-card__iconbtn page-allteachers-email" aria-label="{{#str}} mail, mod_booking {{/str}}" title="{{#str}} mail, mod_booking {{/str}}">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </a>
+                        {{/email}}
+                        {{^messagesdeactivated}}
+                        {{#messagingispossible}}
+                        <a role="button" data-conversationid="0" data-userid="{{teacherid}}" href="{{messagelink}}"
+                            class="btn btn-secondary jku-teacher-card__iconbtn"
+                            aria-label="{{#str}} messagebutton, mod_booking {{/str}}" title="{{#str}} messagebutton, mod_booking {{/str}}">
+                            <i class="fa fa-comment-o" aria-hidden="true"></i>
+                        </a>
+                        {{/messagingispossible}}
+                        {{/messagesdeactivated}}
+                        {{#linktoperformedunitsreport}}
+                        <a href="{{.}}" target="_self"
+                            class="btn btn-secondary jku-teacher-card__iconbtn page-allteachers-linktoperformedunitsreport"
+                            aria-label="{{#str}} teacherhourslabel, mod_booking {{/str}}" title="{{#str}} teacherhourslabel, mod_booking {{/str}}">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        </a>
+                        {{/linktoperformedunitsreport}}
+                    </div>
+                </div>
+            </div>
+            {{/teachers}}
+        </div>
+    </div>
+</div>
+
+{{#js}}
+    require(['mod_booking/edit-teacher-description'], function(init) {
+    init.init();
+    });
+{{/js}}

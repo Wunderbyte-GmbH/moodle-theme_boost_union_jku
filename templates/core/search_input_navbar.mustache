@@ -73,6 +73,11 @@
 {{#js}}
 require([], function() {
     const form = document.querySelector('#searchinput-navbar-{{uniqid}} form');
+    // The navbar renders this template a second time whose markup is
+    // discarded; its js block still runs and must not throw.
+    if (!form) {
+        return;
+    }
     const input = form.querySelector('[data-region="input"]');
 
     form.addEventListener('submit', (e) => {
