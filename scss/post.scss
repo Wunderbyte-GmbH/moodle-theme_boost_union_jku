@@ -190,6 +190,30 @@ a {
     letter-spacing: -0.5px;
 }
 
+// Hero news tag per the Figma Tag component (11227:114236): neutral 32px
+// pill — weak fill and stroke, 16px radius, regular 16/24 body font —
+// instead of the plugin's green Bootstrap badge-success.
+.wb_news_hero .wb_news_hero_box .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    // The card body is a flex column; keep the pill at its content width.
+    align-self: flex-start;
+    height: map-get($spacers, 32);
+    // 8px between tags, 16px gap to the headline (Top container gap).
+    margin: 0 map-get($spacers, 8) map-get($spacers, 16) 0;
+    padding: 0 map-get($spacers, 12);
+    border: 1px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+    border-radius: map-get($spacers, 16);
+    background: var(--Fill-Weak, rgba(0, 0, 0, 0.04));
+    color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    font-weight: 400;
+    line-height: var(--Line-height-Small, 24px);
+    white-space: nowrap;
+}
+
 // Login page side image. Defined here (not in the template's inline <style>)
 // so the [[pix:...]] placeholder is resolved by Moodle's CSS post-processor.
 .custom-login-right {
@@ -223,6 +247,54 @@ a {
 #theme-block-region-outside-top .card.wb_news_hero_box
 .card-body {
   padding:  64px !important;
+}
+
+// The plugin absolute-positions the hero card over the image while the item
+// clips overflow, so wherever the card is taller than the image (md up to
+// roughly xl) the text is cut off top and bottom. Stack image and card in a
+// single grid cell instead: the item grows to the taller of the two and the
+// image (object-fit: cover) covers the extra height. Scoped to the front-page
+// outside-top region so other renderings of the instance (e.g. in a narrow
+// side block) keep the plugin's default behaviour. Note: grid-row/grid-column
+// instead of grid-area, because scssphp evaluates "1 / 1" as division.
+@include media-breakpoint-up(md) {
+    #theme-block-region-outside-top .wb_news_hero .wb_news_hero_item {
+        display: grid;
+    }
+
+    #theme-block-region-outside-top .wb_news_hero .wb_news_hero_item > .image-container,
+    #theme-block-region-outside-top .wb_news_hero .wb_news_hero_item > .card.wb_news_hero_box {
+        grid-row: 1;
+        grid-column: 1;
+    }
+
+    #theme-block-region-outside-top .wb_news_hero .image-container img {
+        height: 100%;
+    }
+
+    #theme-block-region-outside-top .wb_news_hero .card.wb_news_hero_box {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        align-self: center;
+        justify-self: end;
+        z-index: 1;
+    }
+}
+
+// Between md and xl the plugin's 50%-wide card plus the 64px card padding
+// would still make the hero grow far beyond the image height; widen the card
+// and reduce the padding so the hero stays close to the image's own height.
+@include media-breakpoint-between(md, xl) {
+    #theme-block-region-outside-top .wb_news_hero .card.wb_news_hero_box {
+        width: 65%;
+        max-width: none;
+    }
+
+    #theme-block-region-outside-top .card.wb_news_hero_box .card-body {
+        padding: map-get($spacers, 40) !important; // stylelint-disable-line declaration-no-important
+    }
 }
 
 // A single infoslide sits in its col-md-* and would hug the left edge;
