@@ -54,6 +54,8 @@ $PAGE->set_title(get_string('loginsite'));
 // Start page output.
 echo $OUTPUT->header();
 
+$errormsg = '';
+
 if ($errorcode) {
     if ($errorcode == AUTH_LOGIN_UNAUTHORISED) {
         $errormsg = get_string("unauthorisedlogin", "", $frm->username);
