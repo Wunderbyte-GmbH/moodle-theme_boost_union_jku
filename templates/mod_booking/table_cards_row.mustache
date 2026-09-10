@@ -198,6 +198,10 @@
 
 .booking-card__tagsarea {
     min-height: 0;
+    /* min-width: 0 down the whole chain (tagsarea > tags > tag), otherwise each
+       level's min-width: auto grows to the tag's full text width and the tag's
+       max-width: 100% has nothing to truncate against. */
+    min-width: 0;
     display: flex;
     align-items: center;
 }
@@ -206,17 +210,24 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .booking-card__tag {
-    display: inline-flex;
-    align-items: center;
+    /* inline-block (not inline-flex) so text-overflow can ellipsize the label:
+       a long tag must truncate instead of pushing the card wider than its column. */
+    display: inline-block;
     padding: 0.35rem 0.9rem;
     border: 1px solid #d6d6d6;
     border-radius: 999px;
     background: #f8f8f8;
     line-height: 1;
     white-space: nowrap;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .booking-card__actions {
