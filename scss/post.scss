@@ -306,6 +306,11 @@ a {
     }
 }
 
+.wb_news_card_infoslides h6, .wb_news_card_infoslides  {
+  text-align: left;
+  text-indent: 0;
+}
+
 // A single infoslide sits in its col-md-* and would hug the left edge;
 // center the lone card in the row and cap it at the Figma card width.
 .wb_news .row.card-deck > [class*="col-"]:only-child:has(.wb_news_card_infoslides) {
