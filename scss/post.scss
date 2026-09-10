@@ -39,6 +39,11 @@ $bu-button-brand-color: #fff;
   --bs-btn-disabled-color: rgba(79, 176, 191, 0.5) !important;
   --bs-btn-disabled-bg: #fff !important;
   --bs-btn-disabled-border-color: rgba(79, 176, 191, 0.5) !important;
+  border-width: 2px;
+}
+
+.btn-large {
+  padding: 16px 28px !important;
 }
 
 .btn-secondary .fa::before {
@@ -175,6 +180,10 @@ a {
 // background; the design wants the card fully opaque.
 .wb_news_hero .wb_news_hero_box {
     background-color: var(--Background-Raised, #fff);
+}
+
+.card.wb_news_hero_box {
+  box-shadow: none;
 }
 
 .wb_news_hero_box h1 {
