@@ -46,6 +46,58 @@ $bu-button-brand-color: #fff;
   padding: 16px 28px !important;
 }
 
+// Small button (Figma Kurskachel 11231:168864): 35px high, Tiny/Bold
+// 14px/20px label, 16px side padding (12px state + 4px label container).
+// The course card action buttons (bookit/price and course link) share the
+// rules via the second selector, since their markup comes from the plugins.
+// The plugin markup (bookit template, course link) also stacks utility
+// classes onto the buttons (w-100, d-flex, p-1, mb-1/mt-1/mr-1), so
+// display, width, margin and padding carry !important to neutralize them:
+// the small button hugs its label without any outer margins, as in Figma.
+.btn-small,
+.booking-card__actions .btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  width: auto !important;
+  padding: 0 map-get($spacers, 16) !important;
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+// The small button comes in two versions (Figma card actions): the primary
+// version is the borderless filled brand button ("Mehr Info"), the secondary
+// version keeps the white fill but wears the 2px brand stroke at 80%
+// (Figma stroke/brand-strong) instead of the solid one. Fill, label and
+// hover colors come from the .btn-primary/.btn-secondary overrides above.
+.btn-small.btn-primary {
+  border: 0;
+}
+
+.btn-small.btn-secondary,
+.booking-card__actions .btn-secondary {
+  --bs-btn-border-color: rgba(79, 176, 191, 0.8) !important;
+}
+
+// Icon-only shape of the secondary version (Figma "Button icon", the
+// favourite star next to "Mehr Info"): a 35px square without side padding
+// around a 16px icon.
+.btn-small.btn-icon,
+.booking-card__actions .btn-icon {
+  width: 35px;
+  padding: 0 !important;
+
+  .fa,
+  .icon {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
 .btn-secondary .fa::before {
   color: #4FB0BF;
 }
