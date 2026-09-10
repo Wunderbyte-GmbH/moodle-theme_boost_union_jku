@@ -513,10 +513,22 @@ a {
 }
 
 // Center the whole filter row (funnel button + selects). The template puts
-// the justify-content-start utility on .filterheader, hence the !important.
-.jku-filter-bg .filterheader {
+// the justify-content-start utility on .filterheader (hence the !important)
+// and the wunderbyte_table plugin vertically centers it with a
+// .wunderbyte_table_container.showontop .filterheader rule (hence the
+// second selector for specificity).
+.jku-filter-bg .filterheader,
+.wunderbyte_table_container.showontop .jku-filter-bg .filterheader {
     justify-content: center !important; // stylelint-disable-line declaration-no-important
     align-items: flex-start;
+}
+
+// Let the selects block shrink to its content so the funnel button and the
+// selects are centered together as one group instead of the selects
+// centering in the leftover width next to a left-hugging funnel button.
+.jku-filter-bg .filterheader .showfilterdesktop {
+    flex: 0 1 auto;
+    min-width: 0;
 }
 
 // Keep the funnel icon and its "Filter" label on one line and level with
@@ -542,6 +554,15 @@ a {
 .wunderbyte-table-grid {
   max-width: 1488px;
   margin: auto
+}
+
+// The plugin lays out sidebar + content as "grid-template-columns: 0.5fr 3fr".
+// fr tracks cannot shrink below their content's min-content size, so the card
+// grid blows the content column out to 1488px and the last card in each row
+// overflows the page. min-width: 0 lets the column shrink so auto-fill can
+// drop to fewer card columns instead.
+.wunderbyte_table_container .wunderbyteTableClass {
+    min-width: 0;
 }
 
 // Override the wunderbyte_table plugin grid (350px cards, 10px padding, 20px gap).
@@ -1053,17 +1074,26 @@ h4, .jku-h4 {
 }
 
 .booking-card__content {
-    display: grid;
-    grid-template-rows:
-        3.5rem
-        8.5rem
-        8rem
-        1fr
-        3.5rem
-        4rem;
+    display: flex;
+    flex-direction: column;
     gap: map-get($spacers, 16);
     padding: map-get($spacers, 24);
     height: 100%;
+}
+
+// Title + description stay at the top with their natural height ...
+.booking-card__intro {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 16);
+}
+
+// ... while everything from the meta area down is pushed to the bottom.
+.booking-card__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacers, 16);
+    margin-top: auto;
 }
 
 .booking-card__top {
@@ -1074,7 +1104,7 @@ h4, .jku-h4 {
 }
 
 .booking-card__titlearea {
-    min-height: 8.5rem;
+    min-height: 0;
 }
 
 // Heading 4/Bold.
@@ -1098,7 +1128,7 @@ h4, .jku-h4 {
 }
 
 .booking-card__descriptionarea {
-    min-height: 8rem;
+    min-height: 0;
 }
 
 // Tiny/Regular.
@@ -1117,7 +1147,7 @@ h4, .jku-h4 {
 }
 
 .booking-card__metaarea {
-    min-height: 8rem;
+    min-height: 0;
 }
 
 .booking-card__meta {
@@ -1150,7 +1180,7 @@ h4, .jku-h4 {
 }
 
 .booking-card__tagsarea {
-    min-height: 3.5rem;
+    min-height: 0;
     display: flex;
     align-items: center;
 }
@@ -1162,23 +1192,26 @@ h4, .jku-h4 {
 }
 
 .booking-card__tag {
-    display: inline-flex;
-    align-items: center;
+    // inline-block (not inline-flex) so text-overflow can ellipsize the label:
+    // a long tag must truncate instead of pushing the card wider than its column.
+    display: inline-block;
     padding: 0.35rem 0.9rem;
     border-radius: var(--Spacing-16, 16px);
     border: 1px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
     background: var(--Fill-Weak, rgba(0, 0, 0, 0.04));
     line-height: 1;
     white-space: nowrap;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .booking-card__actions {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
     gap: map-get($spacers, 8);
-    margin-top: auto;
-    min-height: 4rem;
 }
 
 .wunderbyteTableJavascript[data-location*="online" i] li[title="Location"] .fa-map-marker::before {

@@ -26,17 +26,21 @@
             </div>
         </div>
 
-        <div class="booking-card__titlearea">
-            {{#title}}
-                <h3 class="booking-card__title">{{{title}}}</h3>
-            {{/title}}
+        <div class="booking-card__intro">
+            <div class="booking-card__titlearea">
+                {{#title}}
+                    <h3 class="booking-card__title">{{{title}}}</h3>
+                {{/title}}
+            </div>
+
+            <div class="booking-card__descriptionarea">
+                {{#description}}
+                    <div class="booking-card__description">{{{description}}}</div>
+                {{/description}}
+            </div>
         </div>
 
-        <div class="booking-card__descriptionarea">
-            {{#description}}
-                <div class="booking-card__description">{{{description}}}</div>
-            {{/description}}
-        </div>
+        <div class="booking-card__bottom">
 
         <div class="booking-card__metaarea">
             {{#hasmetaitems}}
@@ -77,6 +81,7 @@
                 </div>
             {{/primaryaction}}
         </div>
+        </div>
     </div>
 </div>
 
@@ -112,17 +117,26 @@
 }
 
 .booking-card__content {
-    display: grid;
-    grid-template-rows:
-        3.5rem
-        8.5rem
-        8rem
-        1fr
-        3.5rem
-        4rem;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
     padding: 1.5rem;
     height: 100%;
+}
+
+/* Title + description stay at the top with their natural height ... */
+.booking-card__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* ... while everything from the meta area down is pushed to the bottom. */
+.booking-card__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: auto;
 }
 
 .booking-card__top {
@@ -133,7 +147,7 @@
 }
 
 .booking-card__titlearea {
-    min-height: 8.5rem;
+    min-height: 0;
 }
 
 .booking-card__title {
@@ -148,7 +162,7 @@
 }
 
 .booking-card__descriptionarea {
-    min-height: 8rem;
+    min-height: 0;
 }
 
 .booking-card__description {
@@ -160,7 +174,7 @@
 }
 
 .booking-card__metaarea {
-    min-height: 8rem;
+    min-height: 0;
 }
 
 .booking-card__meta {
@@ -183,7 +197,7 @@
 }
 
 .booking-card__tagsarea {
-    min-height: 3.5rem;
+    min-height: 0;
     display: flex;
     align-items: center;
 }
@@ -210,7 +224,5 @@
     justify-content: flex-end;
     align-items: center;
     gap: 0.75rem;
-    margin-top: auto;
-    min-height: 4rem;
 }
 </style>
