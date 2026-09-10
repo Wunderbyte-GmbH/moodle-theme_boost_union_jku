@@ -927,7 +927,10 @@ a {
 // Filterview ([filterview] / [filterviewpseudo] shortcodes): line underneath each category.
 .wbtablefilterview .singlehierarchy {
   border-bottom: 1px solid var(--Text-Strong, rgba(0, 0, 0, 0.90));
-  margin-bottom: 14px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  margin: 0;
 }
 
 // Constrain the footer width on large screens (>= xl / 1200px).
@@ -1079,6 +1082,9 @@ h4, .jku-h4 {
     gap: map-get($spacers, 16);
     padding: map-get($spacers, 24);
     height: 100%;
+    // As a grid item of .booking-card, min-width: auto would let wide content
+    // (e.g. a long nowrap tag) blow the content box out past the card border.
+    min-width: 0;
 }
 
 // Title + description stay at the top with their natural height ...
@@ -1181,6 +1187,10 @@ h4, .jku-h4 {
 
 .booking-card__tagsarea {
     min-height: 0;
+    // min-width: 0 down the whole chain (tagsarea > tags > tag), otherwise each
+    // level's min-width: auto grows to the tag's full text width and the tag's
+    // max-width: 100% has nothing to truncate against.
+    min-width: 0;
     display: flex;
     align-items: center;
 }
@@ -1189,6 +1199,8 @@ h4, .jku-h4 {
     display: flex;
     flex-wrap: wrap;
     gap: map-get($spacers, 8);
+    min-width: 0;
+    max-width: 100%;
 }
 
 .booking-card__tag {
