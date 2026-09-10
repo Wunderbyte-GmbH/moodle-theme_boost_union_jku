@@ -906,6 +906,17 @@ h1, .h1 {
   letter-spacing: -0.5px;
 }
 
+// Heading 3/Bold per Figma.
+h4, .jku-h4 {
+  color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: var(--Font-family-Heading, Montserrat);
+  font-size: var(--Font-size-Heading-3, 24px);
+  font-style: normal;
+  font-weight: 700;
+  line-height: var(--Line-height-Heading-3, 28px);
+}
+
 // Primary navigation items: Small/Regular text style.
 .primary-navigation .nav.more-nav > .nav-item > .nav-link {
   color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
