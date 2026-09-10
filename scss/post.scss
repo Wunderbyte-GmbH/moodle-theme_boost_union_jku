@@ -1249,10 +1249,17 @@ h4, .jku-h4 {
 
 .booking-card__tags {
     display: flex;
-    flex-wrap: wrap;
+    // Single line: the fa-hashtag icon and the tags stay side by side, tags
+    // shrink and ellipsize instead of wrapping below the icon.
+    flex-wrap: nowrap;
+    align-items: center;
     gap: map-get($spacers, 8);
     min-width: 0;
     max-width: 100%;
+
+    > i {
+        flex: 0 0 auto;
+    }
 }
 
 .booking-card__tag {
