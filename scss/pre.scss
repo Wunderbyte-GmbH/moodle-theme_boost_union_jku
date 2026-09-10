@@ -50,6 +50,10 @@ $font-family-sans-serif: "Montserrat", sans-serif;
 $font-size-base: 1rem; // 16px
 $line-height-base: 1.5; // 24px
 
+// Body text uses Medium (500) instead of Regular (400).
+$font-weight-normal: 500;
+$font-weight-base: 500;
+
 $font-size-tiny: 0.875rem; // 14px
 $line-height-tiny: 1.25rem; // 20px
 
@@ -104,7 +108,8 @@ $spacers: map-merge(
         48: 48px,
         60: 60px,
         64: 64px,
-        66: 66px
+        66: 66px,
+        80: 80px
     )
 );
 

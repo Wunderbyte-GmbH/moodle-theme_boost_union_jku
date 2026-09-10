@@ -218,7 +218,7 @@ a {
     color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
     font-family: var(--Font-family-Body, Montserrat);
     font-size: var(--Font-size-Small, 16px);
-    font-weight: 400;
+    font-weight: 500;
     line-height: var(--Line-height-Small, 24px);
     white-space: nowrap;
 }
@@ -362,7 +362,7 @@ a {
             margin: 0;
             color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
             font-size: var(--Font-size-Small, 16px);
-            font-weight: 400;
+            font-weight: 500;
             line-height: var(--Line-height-Small, 24px);
         }
 
@@ -478,7 +478,7 @@ a {
     font-family: var(--Font-family-Body, Montserrat);
     font-size: var(--Font-size-Small, 16px);
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: var(--Line-height-Small, 24px);
 }
 
@@ -506,9 +506,30 @@ a {
     background: linear-gradient(0deg, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 0%, var(--Primary-Light-50, rgba(79, 176, 191, 0.05)) 100%), #FFF;
 }
 
-.jku-filter-bg .wunderbyteTableFilter.row {
+.jku-filter-bg .wunderbyteTableFilter.row,
+.jku-filter-bg .wunderbyteTableFilter {
     justify-content: center;
     gap: map-get($spacers, 12) map-get($spacers, 15);
+}
+
+// Center the whole filter row (funnel button + selects). The template puts
+// the justify-content-start utility on .filterheader, hence the !important.
+.jku-filter-bg .filterheader {
+    justify-content: center !important; // stylelint-disable-line declaration-no-important
+    align-items: flex-start;
+}
+
+// Keep the funnel icon and its "Filter" label on one line and level with
+// the first row of selects when the selects wrap to several rows.
+.jku-filter-bg .filtermobile {
+    flex: 0 0 auto;
+}
+
+.jku-filter-bg .filtermobilebutton {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    min-height: 48px; // matches the select button height
 }
 
 .wunderbyte_table_components  {
@@ -747,7 +768,7 @@ a {
     font-family: var(--Font-family-Body, Montserrat);
     font-size: var(--Font-size-Tiny, 14px);
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: var(--Line-height-Tiny, 20px); /* 142.857% */
 }
 
@@ -925,7 +946,7 @@ h4, .jku-h4 {
   font-family: var(--Font-family-Body, Montserrat);
   font-size: var(--Font-size-Small, 16px);
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: var(--Line-height-Small, 24px);
 }
 
@@ -1087,7 +1108,7 @@ h4, .jku-h4 {
     font-family: var(--Font-family-Body, Montserrat);
     font-size: var(--Font-size-Tiny, 14px);
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: var(--Line-height-Tiny, 20px); /* 142.857% */
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -1548,7 +1569,7 @@ h4, .jku-h4 {
             margin: 0;
             color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
             font-size: var(--Font-size-Small, 16px);
-            font-weight: 400;
+            font-weight: 500;
             line-height: var(--Line-height-Small, 24px);
         }
 
@@ -2158,7 +2179,7 @@ h4, .jku-h4 {
         color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
         font-family: var(--Font-family-Body, Montserrat);
         font-size: var(--Font-size-Small, 16px);
-        font-weight: 400;
+        font-weight: 500;
         line-height: var(--Line-height-Small, 24px);
 
         i {
@@ -2539,7 +2560,7 @@ h4, .jku-h4 {
                 width: 24px;
                 height: 24px;
                 margin: 0;
-                font-weight: 400;
+                font-weight: 500;
                 color: var(--Text-Weak, rgba(0, 0, 0, 0.6));
             }
         }

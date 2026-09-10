@@ -42,12 +42,12 @@
     * The magnifier icon sits inside the field (as the submit button) on the
       left of the input.
     * The field is hidden on mobile viewports where there is no room for it.
+    * The form submits to the JKU course offer page (angebot.php) with the
+      wunderbyte_table wbtsearch parameter instead of the Moodle global
+      search, so the context's action/inputname/hiddenfields are ignored.
 }}
 <div id="searchinput-navbar-{{uniqid}}" class="simplesearchform d-none d-md-flex">
-    <form autocomplete="off" action="{{{ action }}}" method="get" accept-charset="utf-8" class="mform d-flex align-items-center searchform-navbar">
-        {{#hiddenfields}}
-            <input type="hidden" name="{{ name }}" value="{{ value }}">
-        {{/hiddenfields}}
+    <form autocomplete="off" action="{{config.wwwroot}}/theme/boost_union_jku/angebot.php" method="get" accept-charset="utf-8" class="mform d-flex align-items-center searchform-navbar">
         <div class="input-group" {{#grouplabel}}role="group" aria-labelledby="searchgrouplabel-{{uniqid}}"{{/grouplabel}}>
             {{#grouplabel}}
                 <span id="searchgrouplabel-{{uniqid}}" class="visually-hidden">{{{ . }}}</span>
@@ -62,7 +62,7 @@
                 class="form-control"
                 placeholder="{{{ searchstring }}}"
                 aria-label="{{{ searchstring }}}"
-                name="{{{ inputname }}}"
+                name="wbtsearch"
                 data-region="input"
                 autocomplete="off"
             >
