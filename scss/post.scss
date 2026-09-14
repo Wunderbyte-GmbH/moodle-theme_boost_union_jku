@@ -598,6 +598,13 @@ a {
     align-items: center;
     white-space: nowrap;
     min-height: 48px; // matches the select button height
+    // "Filter" headline per Figma (node 11231:167837): Heading 4/Bold, the
+    // funnel label reads at weight 700 rather than the inherited body weight.
+    color: #001F33; // brand_primary/900
+    font-family: var(--Font-family-Heading, Montserrat);
+    font-size: var(--Font-size-Heading-4, 18px);
+    font-weight: 700;
+    line-height: var(--Line-height-Heading-4, 24px);
 }
 
 .wunderbyte_table_components  {
@@ -822,7 +829,7 @@ a {
     box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.08);
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='white'/><circle cx='16' cy='16' r='14' fill='none' stroke='black' stroke-opacity='0.45' stroke-width='2'/></svg>");
     background-repeat: no-repeat;
-    background-position: left 2px center;
+    background-position: left -1px center;
     background-size: 32px 32px;
     transition: background-position .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
@@ -832,7 +839,7 @@ a {
     border-color: #4fb0bf;
     // When on, the knob ring switches from black to the selected blue #4fb0bf.
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='white'/><circle cx='16' cy='16' r='14' fill='none' stroke='%234fb0bf' stroke-width='2'/></svg>");
-    background-position: right 2px center;
+    background-position: right -1px center;
 }
 
 .wunderbyte_table_container .wunderbyteTableFilter .wunderbyteTogglefilter .form-check-label {
@@ -2189,30 +2196,48 @@ h4, .jku-h4 {
         }
     }
 
-    // View switcher: a 32px square button showing only the grid icon;
-    // the native dropdown (List/Cards) still opens on click.
-    .wbtable-templateswitcher-container {
+    // View switcher: a segmented control of 28px square icon buttons (List / Cards).
+    // A single click switches the view directly — no native dropdown.
+    .wbtable-templateswitcher-container.jku-templateswitcher-group {
         justify-content: center;
+        padding: 0;
+        overflow: hidden; // Clip button corners to the container's hard border.
 
         > i {
             display: none; // The design has no separate icon next to the control.
         }
 
-        .wbtable-templateswitcher-select {
-            appearance: none;
-            width: 28px !important; // Inline width: fit-content; 28 + 2 * 2px border = 32px.
+        .jku-templateswitcher-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
             height: 28px;
             padding: 0;
             border: 0;
             border-radius: 0;
-            color: transparent; // Hide the selected label; the icon is the button face.
-            background: $white center no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cg transform='translate(1.25 1.25)'%3E%3Cpath d='M5.41667 0.75H0.75V5.41667H5.41667V0.75Z' stroke='black' stroke-opacity='.9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12.75 0.75H8.08333V5.41667H12.75V0.75Z' stroke='black' stroke-opacity='.9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12.75 8.08333H8.08333V12.75H12.75V8.08333Z' stroke='black' stroke-opacity='.9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5.41667 8.08333H0.75V12.75H5.41667V8.08333Z' stroke='black' stroke-opacity='.9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 16px 16px;
+            background: $white;
+            color: rgba(0, 0, 0, 0.9);
             cursor: pointer;
 
-            option {
-                color: rgba(0, 0, 0, 0.9);
-                font-size: 0.875rem;
+            i {
+                font-size: 16px;
+                line-height: 1;
+            }
+
+            // Divider between adjacent buttons in the segmented control.
+            & + .jku-templateswitcher-btn {
+                border-left: 2px solid rgba(0, 0, 0, 0.9);
+            }
+
+            &:hover {
+                background: rgba(0, 0, 0, 0.04);
+            }
+
+            // The active view is filled; its icon inverts to read on the dark face.
+            &.active {
+                background: rgba(0, 0, 0, 0.9);
+                color: $white;
             }
         }
     }

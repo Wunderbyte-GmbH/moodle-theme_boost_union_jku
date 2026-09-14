@@ -1,0 +1,64 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_wunderbyte_table/component_switchtemplates
+
+    JKU override of the wunderbyte table template switcher.
+
+    Instead of the native <select> (which opens a dropdown), each template is
+    rendered as its own action button in a segmented control, so a single click
+    switches the view directly with no dropdown. Each button carries
+    data-selected-value="{{template}} {{viewparam}}", which the existing
+    actionbutton.js SELECT/BUTTON handler transmits as-is to the
+    switchtemplates method (no JS change required).
+
+    Example context (json):
+    {
+        "switchtemplates": [
+            {
+                "templates": [
+                    {
+                        "template": "local_wunderbyte_table/twtable_list",
+                        "label": "List",
+                        "viewparam": 0,
+                        "selected": true
+                    },
+                    {
+                        "template": "local_wunderbyte_table/twtable_cards",
+                        "label": "Cards",
+                        "viewparam": 1
+                    }
+                ]
+            }
+        ]
+    }
+}}
+{{#switchtemplates}}
+<div class="wbtable-templateswitcher-container jku-templateswitcher-group me-3" role="group"
+    aria-label="{{#str}} templateswitcherlabel, local_wunderbyte_table {{/str}}">
+    {{#templates}}
+    <button type="button"
+        class="jku-templateswitcher-btn{{#selected}} active{{/selected}}"
+        data-id="1" data-type="wb_action_button" data-methodname="switchtemplates" data-nomodal="true"
+        data-selected-value="{{template}} {{viewparam}}"
+        aria-pressed="{{#selected}}true{{/selected}}{{^selected}}false{{/selected}}"
+        title="{{label}}" aria-label="{{label}}">
+        {{! viewparam 0 => list view, non-zero => cards/grid view. }}
+        {{^viewparam}}<i class="fa-solid fa-table-list" aria-hidden="true"></i>{{/viewparam}}
+        {{#viewparam}}<i class="fa-solid fa-table-cells" aria-hidden="true"></i>{{/viewparam}}
+        <span class="sr-only">{{label}}</span>
+    </button>
+    {{/templates}}
+</div>
+{{/switchtemplates}}
