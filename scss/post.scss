@@ -650,7 +650,7 @@ a {
   max-width: min(1488px, 100%);
   margin: auto;
 }
-.form-control {
+.wunderbyte_table_container .form-control {
   height: 48px;
 }
 
@@ -976,10 +976,35 @@ a {
   text-decoration: none;
 }
 
-// Filterview ([filterview] / [filterviewpseudo] shortcodes): line underneath each category.
+// Filterview ([filterview] / [filterviewpseudo] shortcodes).
+// The Bootstrap rows inside re-declare --bs-gutter-x (1.5rem), giving them -12px
+// side margins, but their .container has zero horizontal padding, so the margins
+// overflowed and produced a 12px horizontal scrollbar on the block's .no-overflow
+// wrapper. Zero the row side margins (the 24px inter-column gap is preserved by the
+// columns' own padding). Also let long category labels wrap on narrow screens
+// instead of forcing horizontal overflow.
+.wbtablefilterview {
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .category-item {
+    min-width: 0;
+  }
+
+  .category-label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+// Line underneath each category. min-height (not height) so the row grows when a
+// long label wraps to multiple lines, keeping the underline below the text.
 .wbtablefilterview .singlehierarchy {
   border-bottom: 1px solid var(--Text-Strong, rgba(0, 0, 0, 0.90));
-  height: 56px;
+  min-height: 56px;
+  padding: 8px 0;
   display: flex;
   align-items: center;
   margin: 0;
@@ -1029,6 +1054,15 @@ h4, .jku-h4 {
   line-height: var(--Line-height-Heading-3, 28px);
 }
 
+// Slightly smaller Heading-3 on mobile so long labels (e.g. filterview categories)
+// have more room and don't overflow. Also nudges the line-height down to match.
+@include media-breakpoint-down(md) {
+  :root {
+    --Font-size-Heading-3: 20px;
+    --Line-height-Heading-3: 24px;
+  }
+}
+
 // Primary navigation items: Small/Regular text style.
 .primary-navigation .nav.more-nav > .nav-item > .nav-link {
   color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
@@ -1076,11 +1110,16 @@ h4, .jku-h4 {
     font-style: normal;
     font-weight: 700;
     line-height: var(--Line-height-Tiny, 20px); /* 142.857% */
-    text-decoration-line: underline;
     text-decoration-style: solid;
     text-decoration-skip-ink: none;
     text-decoration-thickness: auto;
     text-underline-offset: auto;
+}
+
+.backtooverview span,
+.backtooverview:hover span,
+.backtooverview:focus span {
+    text-decoration-line: underline;
 }
 
 // FAQ breadcrumb icons: Grid for level 1, Compass for level 2.
@@ -1726,7 +1765,13 @@ h4, .jku-h4 {
     }
 
     .wunderbyte-table-grid .booking-card {
-        grid-template-columns: minmax(0, 1fr) auto;
+        // Figma: 235px image on the left, badges take the rest. A fixed 235px
+        // max on the image column (not a flex track) is what keeps it from
+        // collapsing: the full-width items below span both columns, and when
+        // they cross a flexible 1fr track their intrinsic width is dumped onto
+        // the other (auto) track, which starves the image. Sizing the image
+        // track directly avoids that.
+        grid-template-columns: minmax(0, 235px) minmax(0, 1fr);
         grid-auto-rows: min-content;
         align-items: start;
         gap: map-get($spacers, 20);
@@ -1744,7 +1789,15 @@ h4, .jku-h4 {
         border-bottom: 2px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
     }
 
-    .wunderbyte-table-grid .booking-card__content {
+    // The title/meta/tags/actions live inside __intro and __bottom, which sit
+    // inside __content. All three need display: contents so those items become
+    // direct children of the card grid and their grid-column: 1 / -1 (below)
+    // can span the full card width beneath the image + badges row. Without
+    // lifting __intro/__bottom too, they stay grid items pinned to column 2 and
+    // starve the image column.
+    .wunderbyte-table-grid .booking-card__content,
+    .wunderbyte-table-grid .booking-card__intro,
+    .wunderbyte-table-grid .booking-card__bottom {
         display: contents;
     }
 
