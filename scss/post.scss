@@ -983,6 +983,21 @@ a {
   display: flex;
   align-items: center;
   margin: 0;
+
+  // Per Figma the category row is a plain link: no underline at rest,
+  // only the label (not the icon/count) underlines on hover.
+  .category-item {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+
+      .category-label {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 // Constrain the footer width on large screens (>= xl / 1200px).
@@ -1038,7 +1053,10 @@ h4, .jku-h4 {
   border: none;
 }
 
-#theme-block-region-outside-bottom .block_html.block.block_with_controls.card.mb-3 {
+// Apply to the block regardless of login/edit state. The .block_with_controls
+// class is only present for users who can edit the block (logged in), so gating
+// on it made the light-50 background disappear for logged-out visitors.
+#theme-block-region-outside-bottom .block_html.block.card.mb-3 {
   margin: 0 !important;
   border: none;
   background-color: var(--Primary-Light-50);

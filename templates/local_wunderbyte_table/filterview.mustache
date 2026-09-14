@@ -66,48 +66,34 @@
                     <div class="col-lg-6">
                                         {{#lefthierarchy}}
                         <div class="singlehierarchy">
-                        <div class="category-item d-flex collapsed" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#collapse-{{index}}" data-bs-target="#collapse-{{index}}" aria-expanded="false" aria-controls="collapse-{{index}}" style="width: 100%; text-decoration: none;">
-                                <h4 class="jku-h4">{{label}}</h4>
+                        <a class="category-item d-flex align-items-center w-100" href='{{baseurl}}&wbtfilter={"{{columnname}}":[{{#values}}"{{value}}",{{/values}}{{#values.0}}"{{value}}"{{/values.0}}]}'>
+                                <h4 class="jku-h4 category-label mb-0">{{label}}</h4>
 
-                                <h4 class="ms-auto lexa-h4 d-flex align-items-center mb-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="21" viewBox="0 0 19 21" fill="none">
+                                <span class="ms-auto d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="21" viewBox="0 0 19 21" fill="none" aria-hidden="true">
                                 <path d="M12.9167 1V4.66667M5.58333 1V4.66667M1 8.33333H17.5M2.83333 2.83333H15.6667C16.6792 2.83333 17.5 3.65414 17.5 4.66667V17.5C17.5 18.5125 16.6792 19.3333 15.6667 19.3333H2.83333C1.82081 19.3333 1 18.5125 1 17.5V4.66667C1 3.65414 1.82081 2.83333 2.83333 2.83333Z" stroke="#4FB0BF" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
 
-                                <h4 class="jku-h4 category-count text-primary d-inline-block text-end" style="min-width: 2.5em;">{{count}}</span>
-                                </h4>
-                        </div>
-                        <div id="collapse-{{index}}" class="collapse" aria-labelledby="heading-{{index}}">
-                            <ul class="list-unstyled event-list filterviewlist">
-                                {{#values}}
-                                <li class="d-flex"><a href='{{baseurl}}&wbtfilter={"{{columnname}}":["{{value}}"]}' class="lexa-b1 text-underline">{{key}}</a><span class="event-count ms-auto lexa-info">{{count}} <span class="spanhidemobile">{{#str}}veranstaltungen, local_wunderbyte_table{{/str}}</span></span></li>
-                                {{/values}}
-                            </ul>
-                        </div>
+                                <span class="jku-h4 category-count text-primary d-inline-block text-end" style="min-width: 2.5em;">{{count}}</span>
+                                </span>
+                        </a>
                         </div>
                          {{/lefthierarchy}}
                     </div>
                     <div class="col-lg-6">
                     {{#righthierarchy}}
                                <div class="singlehierarchy">
-                        <div class="category-item d-flex collapsed" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-bs-toggle="collapse" data-target="#collapse-{{index}}" data-bs-target="#collapse-{{index}}" aria-expanded="false" aria-controls="collapse-{{index}}" style="width: 100%; text-decoration: none;">
-                                <h4 class="jku-h4">{{label}}</h4>
+                        <a class="category-item d-flex align-items-center w-100" href='{{baseurl}}&wbtfilter={"{{columnname}}":[{{#values}}"{{value}}",{{/values}}{{#values.0}}"{{value}}"{{/values.0}}]}'>
+                                <h4 class="jku-h4 category-label mb-0">{{label}}</h4>
 
-                                <h4 class="ms-auto lexa-h4 d-flex align-items-center mb-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="21" viewBox="0 0 19 21" fill="none">
+                                <span class="ms-auto d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="21" viewBox="0 0 19 21" fill="none" aria-hidden="true">
                                 <path d="M12.9167 1V4.66667M5.58333 1V4.66667M1 8.33333H17.5M2.83333 2.83333H15.6667C16.6792 2.83333 17.5 3.65414 17.5 4.66667V17.5C17.5 18.5125 16.6792 19.3333 15.6667 19.3333H2.83333C1.82081 19.3333 1 18.5125 1 17.5V4.66667C1 3.65414 1.82081 2.83333 2.83333 2.83333Z" stroke="#4FB0BF" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
 
-                                <h4 class="jku-h4 category-count text-primary d-inline-block text-end" style="min-width: 2.5em;">{{count}}</span>
-                                </h4>
-                        </div>
-                        <div id="collapse-{{index}}" class="collapse" aria-labelledby="heading-{{index}}">
-                            <ul class="list-unstyled event-list filterviewlist">
-                                {{#values}}
-                                <li class="d-flex"><a href='{{baseurl}}&wbtfilter={"{{columnname}}":["{{value}}"]}' class="lexa-b1 text-underline">{{key}}</a><span class="event-count ms-auto lexa-info">{{count}} <span class="spanhidemobile">{{#str}}veranstaltungen, local_wunderbyte_table{{/str}}</span></span></li>
-                                {{/values}}
-                            </ul>
-                        </div>
+                                <span class="jku-h4 category-count text-primary d-inline-block text-end" style="min-width: 2.5em;">{{count}}</span>
+                                </span>
+                        </a>
                         </div>
                      {{/righthierarchy}}
                     </div>
