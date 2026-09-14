@@ -1542,6 +1542,8 @@ h4, .jku-h4 {
 
     i {
         font-size: 0.85em;
+        // The remove (times) icon uses the brand colour on regular chips.
+        color: #4FB0BF;
     }
 }
 
@@ -1550,6 +1552,12 @@ h4, .jku-h4 {
     background: var(--Stroke-Brand-strong, rgba(79, 176, 191, 0.80));
     border-color: var(--Stroke-Brand-weak, rgba(79, 176, 191, 0.20));
     color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+
+    // Keep the reset chip's icon dark for contrast against the brand fill,
+    // it must not turn brand-coloured like the per-value chips.
+    i {
+        color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+    }
 
     &:hover,
     &:focus {
