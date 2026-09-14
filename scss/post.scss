@@ -561,6 +561,10 @@ a {
 .jku-filter-bg .wunderbyteTableFilter.row,
 .jku-filter-bg .wunderbyteTableFilter {
     justify-content: center;
+    // Center every control on a row (dropdown buttons, the toggle, the
+    // funnel filter button) on one vertical baseline instead of stretching
+    // to equal height, so the shorter toggle lines up with the 48px filters.
+    align-items: center;
     gap: map-get($spacers, 12) map-get($spacers, 15);
 }
 
@@ -654,8 +658,78 @@ a {
   height: 48px;
 }
 
+// -----------------------------------------------------------------
+// Filter dropdown field (Figma filter band, node 11231:167837): each
+// filter (Trainer/in, Sprache, Kategorie, Ort, Monat) is a 48px white
+// box with a 1px strong stroke, the label left-aligned, an optional
+// round count badge pushed to the right and a chevron-down icon. This
+// replaces the plugin's light-grey button (#d3d3d3bd border) and its
+// Bootstrap triangle caret.
+// -----------------------------------------------------------------
 .wunderbyte_table_container .wunderbyteTableFilter .dropdownMenuButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: map-get($spacers, 8);
+  width: 250px;
   height: 48px;
+  // Reserve room on the right for the 24px chevron (16px inset).
+  padding: 0 map-get($spacers, 40) 0 map-get($spacers, 16);
+  border: 1px solid var(--Stroke-Strong, rgba(0, 0, 0, 0.45));
+  background: #fff;
+  font-family: var(--Font-family-Body, Montserrat);
+  font-size: var(--Font-size-Small, 16px);
+  line-height: var(--Line-height-Small, 24px);
+  color: var(--Text-Strong, rgba(0, 0, 0, 0.90));
+  white-space: nowrap;
+}
+
+// The label grows so the count badge lands on the right next to the
+// chevron; long labels get an ellipsis instead of wrapping.
+.wunderbyte_table_container .wunderbyteTableFilter .dropdownMenuButton .filterlabel {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: start;
+}
+
+// Round count badge (number of selected values) per Figma: 24px pill,
+// weak fill and stroke, Tiny/Regular 14/20 weak text. Overrides the
+// Bootstrap .badge-light box.
+.wunderbyte_table_container .wunderbyteTableFilter .dropdownMenuButton .filtercounter.badge:not(.hidden) {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: map-get($spacers, 24);
+  height: map-get($spacers, 24);
+  padding: 0 map-get($spacers, 8);
+  border: 1px solid var(--Stroke-Weak, rgba(0, 0, 0, 0.10));
+  border-radius: map-get($spacers, 16);
+  background: var(--Fill-Weak, rgba(0, 0, 0, 0.04));
+  font-size: var(--Font-size-Tiny, 14px);
+  font-weight: 400;
+  line-height: var(--Line-height-Tiny, 20px);
+  color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+}
+
+// Swap the Bootstrap triangle caret for a chevron-down outline icon in
+// the brand primary/900 colour (#001F33), matching the Figma field.
+.wunderbyte_table_container .wunderbyteTableFilter .dropdownMenuButton::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: map-get($spacers, 16);
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border: 0;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M6 9l6 6 6-6' stroke='%23001F33' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px 24px;
 }
 
 // -----------------------------------------------------------------
@@ -708,6 +782,65 @@ a {
 
 .wunderbyterFilterList li.form-check:has(.form-check-input:checked):hover .form-check-label {
     color: #fff;
+}
+
+// -----------------------------------------------------------------
+// Toggle filter (wunderbyteTogglefilter, e.g. "Neue Kurse") restyled
+// to the JKU Figma switch. The plugin sizes the Bootstrap switch at
+// 48x24px; here we redraw it as a 64x32 pill with a weak fill, strong
+// 1px border and an inset "sunken" shadow, plus a 32px white knob with
+// a 2px rgba(0,0,0,.45) ring. When checked the track fills with
+// Fill/Selected #4fb0bf. The knob is the switch background-image so it
+// slides on background-position (inset 2px from each end); the container is a flex row with
+// a 12px gap to the label (Montserrat 16px / 24px, text-strong).
+// Selectors carry the plugin's container/filter classes so they outrank
+// its own high-specificity switch rules without !important.
+// -----------------------------------------------------------------
+.wunderbyte_table_container .wunderbyteTableFilter .wunderbyteTogglefilter.form-check.form-switch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 0;
+    // Match the 48px height of the sibling filter controls (.form-control,
+    // .dropdownMenuButton) and drop the template's mt-2 nudge, so the 32px
+    // switch centres on the same 24px baseline as the other filters.
+    min-height: 48px;
+    height: 48px;
+    margin-top: 0 !important;
+}
+
+.wunderbyte_table_container .wunderbyteTableFilter .wunderbyteTogglefilter.form-switch input[type="checkbox"].form-check-input {
+    flex: 0 0 auto;
+    width: 64px;
+    height: 32px;
+    min-width: 64px;
+    min-height: 32px;
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    border-radius: 32px;
+    background-color: rgba(0, 0, 0, 0.04);
+    box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='white'/><circle cx='16' cy='16' r='14' fill='none' stroke='black' stroke-opacity='0.45' stroke-width='2'/></svg>");
+    background-repeat: no-repeat;
+    background-position: left 2px center;
+    background-size: 32px 32px;
+    transition: background-position .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.wunderbyte_table_container .wunderbyteTableFilter .wunderbyteTogglefilter.form-switch input[type="checkbox"].form-check-input:checked {
+    background-color: #4fb0bf;
+    border-color: #4fb0bf;
+    // When on, the knob ring switches from black to the selected blue #4fb0bf.
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='white'/><circle cx='16' cy='16' r='14' fill='none' stroke='%234fb0bf' stroke-width='2'/></svg>");
+    background-position: right 2px center;
+}
+
+.wunderbyte_table_container .wunderbyteTableFilter .wunderbyteTogglefilter .form-check-label {
+    margin: 0;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
 }
 
 .wb-news-edit-single .btn {
@@ -1032,6 +1165,49 @@ a {
     margin-left: auto !important;
     margin-right: auto !important;
   }
+}
+
+// -----------------------------------------------------------------
+// Footer (Figma 11229:102708): a minimal bar with a top border, the
+// "Personalentwicklung" link on the left and the legal links (AGB,
+// Impressum, Datenschutzerklärung LIMAK) right-aligned. The content
+// row is capped at the 1488px content width and centered, matching
+// the 120px side insets of the 1728px design frame.
+// -----------------------------------------------------------------
+.jku-footer-main {
+    padding: map-get($spacers, 48) 120px;
+}
+
+.jku-footer-bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: map-get($spacers, 24);
+    max-width: 1488px;
+    margin: 0 auto;
+}
+
+.jku-footer-nav {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: map-get($spacers, 24);
+}
+
+// Small, Text/Weak per Figma; weight bumped to 500 (Figma's 400 reads too
+// light at this size). The shared teal a:hover applies.
+.jku-footer-link,
+.jku-footer-link:focus {
+    color: var(--Text-Weak, rgba(0, 0, 0, 0.60));
+    font-family: var(--Font-family-Body, Montserrat);
+    font-size: var(--Font-size-Small, 16px);
+    font-weight: 500;
+    line-height: var(--Line-height-Small, 24px);
+    text-decoration: none;
+}
+
+.jku-footer-link:hover {
+    text-decoration: underline;
 }
 
 // Heading 1/Bold: size, family and line-height come from pre.scss variables
@@ -1888,37 +2064,22 @@ h4, .jku-h4 {
         }
     }
 
-    // Footer: 48px/32px padding (the zero-padding container needs it back).
-    .jku-footer-main .container-fluid {
-        padding: map-get($spacers, 48) map-get($spacers, 32);
+    // Footer: reduce the 120px side insets to 20px and stack the two link
+    // groups into a single left-aligned column below the md breakpoint.
+    .jku-footer-main {
+        padding: map-get($spacers, 32) map-get($spacers, 20);
     }
 
-    .jku-footer-main .my-48 {
-        margin-top: 0;
-        margin-bottom: 0;
+    .jku-footer-bottom {
+        flex-direction: column;
+        gap: map-get($spacers, 16);
     }
 
-    // Footer order per Figma (11756:38782): logo, social icons, copyright.
-    // On desktop logo and copyright share the left column; on mobile the
-    // wrapper dissolves so the three parts can be reordered in the column.
-    .jku-footer-main .jku-footer-brand {
-        display: contents;
-    }
-
-    .jku-footer-main .jku-footer-logo-link {
-        order: 1;
-        // The logo link carries an mb-16 utility (desktop spacing).
-        margin-bottom: map-get($spacers, 24) !important; // stylelint-disable-line declaration-no-important
-    }
-
-    .jku-footer-main nav {
-        order: 2;
-        margin-bottom: map-get($spacers, 32);
-        padding-top: 0;
-    }
-
-    .jku-footer-main .jku-footer-copyright {
-        order: 3;
+    .jku-footer-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: map-get($spacers, 16);
     }
 }
 
@@ -2116,8 +2277,15 @@ h4, .jku-h4 {
     @include media-breakpoint-up(lg) {
         flex: 0 0 auto;
         width: 500px;
+        // flex-start so the column is only as tall as the card, otherwise it
+        // would stretch to the content height and sticky would have no effect.
+        align-self: flex-start;
         position: sticky;
         top: calc(#{$navbar-height} + #{map-get($spacers, 24)});
+        // Cap the height to the viewport so a tall offer card still sticks
+        // instead of scrolling out of view; it scrolls internally if needed.
+        max-height: calc(100vh - #{$navbar-height} - #{map-get($spacers, 24)} * 2);
+        overflow-y: auto;
     }
 }
 

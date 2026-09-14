@@ -123,6 +123,10 @@
                 </select>
             </div>
         {{/gotopage}}
+
+        {{#showingrecords}}
+            <div class="wbt-showing-records">{{showingrecords}}</div>
+        {{/showingrecords}}
     </div>
 {{/nopages}}
 <style>
@@ -232,6 +236,15 @@
     }
 }
 
+.wbt-showing-records {
+    margin: 0 0 0 auto;
+    color: var(--Text-Weak, rgba(0, 0, 0, 0.6));
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
 @media (max-width: 767.98px) {
     .wbt-pagination-navs {
         align-items: flex-start;
@@ -240,6 +253,10 @@
 
     .pagination.wbt-pagination {
         padding-left: 0;
+    }
+
+    .wbt-showing-records {
+        margin-left: 0;
     }
 }
 </style>
