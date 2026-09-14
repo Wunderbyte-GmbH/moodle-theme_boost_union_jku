@@ -2196,12 +2196,18 @@ h4, .jku-h4 {
         }
     }
 
-    // View switcher: a segmented control of 28px square icon buttons (List / Cards).
-    // A single click switches the view directly — no native dropdown.
+    // View switcher: a single square icon toggle per the JKU Figma design
+    // (node 11231-167862: 32px, 2px border, no radius, "Raised" shadow).
+    // Both template buttons are rendered, but only the one for the view you can
+    // switch TO is visible — the current view's button (.active) is hidden, so
+    // one click always toggles to the other view. This overrides the shared
+    // bordered-box styling above, since here the button carries its own border.
     .wbtable-templateswitcher-container.jku-templateswitcher-group {
-        justify-content: center;
+        height: auto;
         padding: 0;
-        overflow: hidden; // Clip button corners to the container's hard border.
+        background: transparent;
+        border: 0;
+        box-shadow: none;
 
         > i {
             display: none; // The design has no separate icon next to the control.
@@ -2211,33 +2217,37 @@ h4, .jku-h4 {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             padding: 0;
-            border: 0;
+            border: 2px solid rgba(0, 0, 0, 0.9);
             border-radius: 0;
             background: $white;
             color: rgba(0, 0, 0, 0.9);
             cursor: pointer;
+            // Figma "Shadow/Raised".
+            box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
 
-            i {
-                font-size: 16px;
-                line-height: 1;
+            // The current view's button is hidden: only the toggle target shows.
+            &.active {
+                display: none;
             }
 
-            // Divider between adjacent buttons in the segmented control.
-            & + .jku-templateswitcher-btn {
-                border-left: 2px solid rgba(0, 0, 0, 0.9);
+            // Each button outputs both icons; show only the one matching its
+            // template, keyed off the data-selected-value prefix.
+            .jku-templateswitcher-icon {
+                display: none;
+                line-height: 0;
+            }
+            &[data-selected-value^="local_jku/table_list"] .jku-templateswitcher-icon--list {
+                display: inline-flex;
+            }
+            &[data-selected-value^="local_jku/table_card"] .jku-templateswitcher-icon--cards {
+                display: inline-flex;
             }
 
             &:hover {
                 background: rgba(0, 0, 0, 0.04);
-            }
-
-            // The active view is filled; its icon inverts to read on the dark face.
-            &.active {
-                background: rgba(0, 0, 0, 0.9);
-                color: $white;
             }
         }
     }
